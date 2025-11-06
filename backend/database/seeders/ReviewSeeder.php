@@ -15,24 +15,23 @@ class ReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::all()->shuffle();
-        $products = Product::all()->shuffle();
+        $users = User::all();
+        $products = Product::all();
 
-        $maxReviews = 50;
-        $count = 0;
-
+        $pairs = [];
         foreach ($users as $user) {
             foreach ($products as $product) {
-                Review::factory()->create([
-                    'user_id' => $user->id,
-                    'product_id' => $product->id,
-                ]);
-
-                $count++;
-                if ($count >= $maxReviews) {
-                    break 2;
-                }
+                $pairs[] = [$user->id, $product->id];
             }
+        }
+
+        $pairs = collect($pairs)->shuffle()->take(50);
+
+        foreach ($pairs as [$userId, $productId]) {
+            Review::factory()->create([
+                'user_id' => $userId,
+                'product_id' => $productId,
+            ]);
         }
     }
 }
