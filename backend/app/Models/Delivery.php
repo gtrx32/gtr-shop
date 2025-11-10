@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use App\Enums\DeliveryStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Delivery extends Model
 {
+    /** @use HasFactory<\Database\Factories\CartFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'order_id',
         'status',
