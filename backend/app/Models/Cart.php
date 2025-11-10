@@ -26,4 +26,19 @@ class Cart extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function totalItems(): int
+    {
+        return $this->cartProducts->sum('amount');
+    }
+
+    public function totalPrice(): float
+    {
+        return $this->cartProducts->sum(fn($cp) => $cp->quantity * $cp->price);
+    }
+
+    public function clear(): void
+    {
+        $this->cartProducts()->delete();
+    }
 }
