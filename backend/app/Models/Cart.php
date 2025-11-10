@@ -14,7 +14,8 @@ class Cart extends Model
 
     protected $fillable = [
         'user_id',
-        'amount'
+        'total_price',
+        'total_quantity'
     ];
 
     public function user(): BelongsTo
@@ -25,20 +26,5 @@ class Cart extends Model
     public function cartProducts(): HasMany
     {
         return $this->hasMany(CartProduct::class);
-    }
-
-    public function totalItems(): int
-    {
-        return $this->cartProducts->sum('amount');
-    }
-
-    public function totalPrice(): float
-    {
-        return $this->cartProducts->sum(fn($cp) => $cp->quantity * $cp->price);
-    }
-
-    public function clear(): void
-    {
-        $this->cartProducts()->delete();
     }
 }
