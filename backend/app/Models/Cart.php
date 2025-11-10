@@ -24,7 +24,7 @@ class Cart extends Model
 
     public function cartProducts(): HasMany
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(CartProduct::class);
     }
 
     public function totalItems(): int
