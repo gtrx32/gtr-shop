@@ -21,7 +21,7 @@ class UserCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -31,42 +31,101 @@ class UserCrudController extends CrudController
         CRUD::setEntityNameStrings('user', 'users');
     }
 
+    protected function setupShowOperation()
+    {
+        CRUD::column('id')->label('ID');
+
+        CRUD::addColumn([
+            'name'  => 'avatar',
+            'type'  => 'image',
+            'label' => 'Аватар',
+            'width'  => '200px',
+            'height' => '200px',
+            'prefix'=> 'storage/',
+        ]);
+
+        CRUD::column('name')->label('Имя');
+        CRUD::column('email')->label('Электронная почта');
+        CRUD::column('created_at')->label('Дата создания');
+        CRUD::column('updated_at')->label('Дата обновления');
+    }
+
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::column('id')->label('ID');
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'avatar',
+            'type' => 'image',
+            'label' => 'Аватар',
+            'width' => '50px',
+            'height' => '50px',
+            'prefix'=> 'storage/',
+        ]);
+
+        CRUD::column('name')->label('Имя');
+        CRUD::column('email')->label('Электронная почта');
+        CRUD::column('created_at')->label('Дата создания');
+        CRUD::column('updated_at')->label('Дата обновления');
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(UserRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'name',
+            'label' => 'Имя',
+            'type' => 'text',
+        ]);
+
+        CRUD::addField([
+            'name' => 'email',
+            'label' => 'Электронная почта',
+            'type' => 'email',
+        ]);
+
+        CRUD::addField([
+            'name' => 'password',
+            'label' => 'Пароль',
+            'type' => 'password',
+        ]);
+
+        CRUD::addField([
+            'name' => 'avatar',
+            'type' => 'upload',
+            'label' => 'Изображение',
+            'upload' => true,
+            'disk' => 'public',
+            'withFiles' => true,
+            'prefix' => 'avatars/',
+        ]);
+
+        if ($this->crud->getCurrentEntry() && $this->crud->getCurrentEntry()->avatar) {
+            $avatarUrl = asset('storage/avatars/' . $this->crud->getCurrentEntry()->avatar);
+            CRUD::addField([
+                'name' => 'avatar_preview',
+                'type' => 'custom_html',
+                'value' => '<img src="' . $avatarUrl . '" style="max-width:150px; max-height:150px; margin-bottom:10px;" />',
+            ]);
+        }
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
