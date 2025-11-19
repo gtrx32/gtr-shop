@@ -113,6 +113,15 @@ class ProductCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
+            'name' => 'image',
+            'type' => 'image',
+            'label' => 'Изображение',
+            'prefix' => 'storage/',
+            'height' => '50px',
+            'width' => '50px',
+        ]);
+
+        CRUD::addColumn([
             'name' => 'name',
             'type' => 'text',
             'label' => 'Название',
@@ -137,15 +146,6 @@ class ProductCrudController extends CrudController
             'name' => 'stock',
             'type' => 'number',
             'label' => 'Остаток на складе',
-        ]);
-
-        CRUD::addColumn([
-            'name' => 'image',
-            'type' => 'image',
-            'label' => 'Изображение',
-            'prefix' => 'storage/',
-            'height' => '50px',
-            'width' => '50px',
         ]);
 
         CRUD::addColumn([
