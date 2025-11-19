@@ -29,7 +29,7 @@ class ReviewCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Review::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/review');
-        CRUD::setEntityNameStrings('review', 'reviews');
+        CRUD::setEntityNameStrings('отзыв', 'отзывы');
     }
 
     protected function setupShowOperation(): void

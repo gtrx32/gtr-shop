@@ -28,7 +28,7 @@ class CartCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Cart::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/cart');
-        CRUD::setEntityNameStrings('cart', 'carts');
+        CRUD::setEntityNameStrings('корзина', 'корзины');
         CRUD::denyAccess(['create', 'update', 'delete']);
     }
 
