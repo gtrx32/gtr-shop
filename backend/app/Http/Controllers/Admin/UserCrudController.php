@@ -33,21 +33,44 @@ class UserCrudController extends CrudController
 
     protected function setupShowOperation()
     {
-        CRUD::column('id')->label('ID');
-
         CRUD::addColumn([
-            'name'  => 'avatar',
-            'type'  => 'image',
-            'label' => 'Аватар',
-            'width'  => '200px',
-            'height' => '200px',
-            'prefix'=> 'storage/',
+            'name'  => 'id',
+            'type'  => 'number',
+            'label' => 'ID',
         ]);
 
-        CRUD::column('name')->label('Имя');
-        CRUD::column('email')->label('Электронная почта');
-        CRUD::column('created_at')->label('Дата создания');
-        CRUD::column('updated_at')->label('Дата обновления');
+        CRUD::addColumn([
+            'name'   => 'avatar',
+            'type'   => 'image',
+            'label'  => 'Аватар',
+            'width'  => '200px',
+            'height' => '200px',
+            'prefix' => 'storage/',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'name',
+            'type'  => 'text',
+            'label' => 'Имя',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'email',
+            'type'  => 'email',
+            'label' => 'Электронная почта',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'created_at',
+            'type'  => 'datetime',
+            'label' => 'Дата создания',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'updated_at',
+            'type'  => 'datetime',
+            'label' => 'Дата обновления',
+        ]);
     }
 
     /**
@@ -58,21 +81,44 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id')->label('ID');
-
         CRUD::addColumn([
-            'name' => 'avatar',
-            'type' => 'image',
-            'label' => 'Аватар',
-            'width' => '50px',
-            'height' => '50px',
-            'prefix'=> 'storage/',
+            'name'  => 'id',
+            'type'  => 'number',
+            'label' => 'ID',
         ]);
 
-        CRUD::column('name')->label('Имя');
-        CRUD::column('email')->label('Электронная почта');
-        CRUD::column('created_at')->label('Дата создания');
-        CRUD::column('updated_at')->label('Дата обновления');
+        CRUD::addColumn([
+            'name'   => 'avatar',
+            'type'   => 'image',
+            'label'  => 'Аватар',
+            'width'  => '50px',
+            'height' => '50px',
+            'prefix' => 'storage/',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'name',
+            'type'  => 'text',
+            'label' => 'Имя',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'email',
+            'type'  => 'email',
+            'label' => 'Электронная почта',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'created_at',
+            'type'  => 'datetime',
+            'label' => 'Дата создания',
+        ]);
+
+        CRUD::addColumn([
+            'name'  => 'updated_at',
+            'type'  => 'datetime',
+            'label' => 'Дата обновления',
+        ]);
     }
 
     /**
@@ -87,20 +133,20 @@ class UserCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'name',
-            'label' => 'Имя',
             'type' => 'text',
+            'label' => 'Имя',
         ]);
 
         CRUD::addField([
             'name' => 'email',
-            'label' => 'Электронная почта',
             'type' => 'email',
+            'label' => 'Электронная почта',
         ]);
 
         CRUD::addField([
             'name' => 'password',
-            'label' => 'Пароль',
             'type' => 'password',
+            'label' => 'Пароль',
         ]);
 
         CRUD::addField([
