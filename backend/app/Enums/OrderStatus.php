@@ -10,4 +10,16 @@ enum OrderStatus: string
     case Shipped = 'shipped';
     case Completed = 'completed';
     case Cancelled = 'cancelled';
+
+    public function label(): string
+    {
+        return match($this) {
+            self::Pending => 'Ожидание',
+            self::Paid => 'Оплачено',
+            self::Processing => 'Обработка',
+            self::Shipped => 'Отправлено',
+            self::Completed => 'Завершено',
+            self::Cancelled => 'Отменено',
+        };
+    }
 }
