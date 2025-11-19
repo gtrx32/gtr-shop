@@ -25,7 +25,12 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|string|min:3|max:255',
+            'slug' => 'required|string|unique:products,slug,' . $this->id . '|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'avatar' => 'nullable|image|max:2048',
         ];
     }
 
