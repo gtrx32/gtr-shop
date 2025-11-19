@@ -34,36 +34,36 @@ class ProductCrudController extends CrudController
     protected function setupShowOperation()
     {
         CRUD::addColumn([
-            'name'  => 'id',
-            'type'  => 'number',
+            'name' => 'id',
+            'type' => 'number',
             'label' => 'ID',
         ]);
 
         CRUD::addColumn([
-            'name'   => 'image',
-            'type'   => 'image',
-            'label'  => 'Картинка',
-            'width'  => '200px',
+            'name' => 'image',
+            'type' => 'image',
+            'label' => 'Картинка',
+            'width' => '200px',
             'height' => '200px',
             'prefix' => 'storage/',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'type' => 'text',
             'label' => 'Название',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'slug',
-            'type'  => 'text',
+            'name' => 'slug',
+            'type' => 'text',
             'label' => 'Символьный код',
         ]);
 
         CRUD::addColumn([
-            'name'    => 'description',
-            'type'    => 'textarea',
-            'label'   => 'Описание',
+            'name' => 'description',
+            'type' => 'textarea',
+            'label' => 'Описание',
             'wrapper' => [
                 'element' => 'div',
                 'style'   => 'max-width:500px; white-space: normal; word-wrap: break-word;',
@@ -71,29 +71,29 @@ class ProductCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name'  => 'price',
-            'type'  => 'number',
+            'name' => 'price',
+            'type' => 'number',
             'label' => 'Стоимость',
             'decimals' => 2,
-            'suffix'   => ' ₽',
+            'suffix' => ' ₽',
             'thousands_sep' => ' ',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'stock',
-            'type'  => 'number',
+            'name' => 'stock',
+            'type' => 'number',
             'label' => 'Остаток на складе',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'created_at',
-            'type'  => 'datetime',
+            'name' => 'created_at',
+            'type' => 'datetime',
             'label' => 'Дата создания',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'updated_at',
-            'type'  => 'datetime',
+            'name' => 'updated_at',
+            'type' => 'datetime',
             'label' => 'Дата обновления',
         ]);
     }
@@ -107,26 +107,26 @@ class ProductCrudController extends CrudController
     protected function setupListOperation(): void
     {
         CRUD::addColumn([
-            'name'  => 'id',
-            'type'  => 'number',
+            'name' => 'id',
+            'type' => 'number',
             'label' => 'ID',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'type' => 'text',
             'label' => 'Название',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'slug',
-            'type'  => 'text',
+            'name' => 'slug',
+            'type' => 'text',
             'label' => 'Символьный код',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'price',
-            'type'  => 'number',
+            'name' => 'price',
+            'type' => 'number',
             'label' => 'Стоимость',
             'decimals' => 2,
             'suffix'   => ' ₽',
@@ -134,29 +134,29 @@ class ProductCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name'  => 'stock',
-            'type'  => 'number',
+            'name' => 'stock',
+            'type' => 'number',
             'label' => 'Остаток на складе',
         ]);
 
         CRUD::addColumn([
-            'name'   => 'image',
-            'type'   => 'image',
-            'label'  => 'Изображение',
+            'name' => 'image',
+            'type' => 'image',
+            'label' => 'Изображение',
             'prefix' => 'storage/',
             'height' => '50px',
-            'width'  => '50px',
+            'width' => '50px',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'created_at',
-            'type'  => 'datetime',
+            'name' => 'created_at',
+            'type' => 'datetime',
             'label' => 'Дата создания',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'updated_at',
-            'type'  => 'datetime',
+            'name' => 'updated_at',
+            'type' => 'datetime',
             'label' => 'Дата обновления',
         ]);
     }
@@ -172,36 +172,36 @@ class ProductCrudController extends CrudController
         CRUD::setValidation(ProductRequest::class);
 
         CRUD::addField([
-            'name'  => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'type' => 'text',
             'label' => 'Название',
         ]);
 
         CRUD::addField([
-            'name'  => 'slug',
-            'type'  => 'text',
+            'name' => 'slug',
+            'type' => 'text',
             'label' => 'Символьный код',
         ]);
 
         CRUD::addField([
-            'name'  => 'description',
-            'type'  => 'textarea',
+            'name' => 'description',
+            'type' => 'textarea',
             'label' => 'Описание',
         ]);
 
         CRUD::addField([
-            'name'        => 'price',
-            'type'        => 'number',
-            'label'       => 'Стоимость',
+            'name' => 'price',
+            'type' => 'number',
+            'label' => 'Стоимость',
             'attributes' => ['step' => '0.01', 'min' => '0'],
             'decimals' => 2,
-            'suffix'   => ' ₽',
+            'suffix' => ' ₽',
             'thousands_sep' => ' ',
         ]);
 
         CRUD::addField([
-            'name'  => 'stock',
-            'type'  => 'number',
+            'name' => 'stock',
+            'type' => 'number',
             'label' => 'Остаток на складе',
         ]);
 
