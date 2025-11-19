@@ -18,37 +18,35 @@ class OrderSeeder extends Seeder
         $users = User::all();
         $products = Product::all();
 
-        foreach ($users as $user) {
-            $ordersCount = rand(1, 3);
+        for ($i = 0; $i < 20; $i++) {
+            $user = $users->random();
 
-            for ($i = 0; $i < $ordersCount; $i++) {
-                $order = Order::factory()->create(['user_id' => $user->id]);
+            $order = Order::factory()->create(['user_id' => $user->id]);
 
-                $productsForOrder = $products->shuffle()->take(rand(1, 3));
-                $totalPrice = 0;
-                $totalQuantity = 0;
+            $productsForOrder = $products->shuffle()->take(rand(1, 3));
+            $totalPrice = 0;
+            $totalQuantity = 0;
 
-                foreach ($productsForOrder as $product) {
-                    $quantity = rand(1, 5);
+            foreach ($productsForOrder as $product) {
+                $quantity = rand(1, 3);
 
-                    $order->orderProducts()->create([
-                        'product_id' => $product->id,
-                        'quantity' => $quantity,
-                        'price' => $product->price,
-                    ]);
-
-                    $totalPrice += $product->price * $quantity;
-                    $totalQuantity += $quantity;
-                }
-
-                $order->update([
-                    'total_price' => $totalPrice,
-                    'total_quantity' => $totalQuantity,
+                $order->orderProducts()->create([
+                    'product_id' => $product->id,
+                    'quantity' => $quantity,
+                    'price' => $product->price,
                 ]);
 
-                $order->payment()->create(['amount' => $totalPrice]);
-                $order->delivery()->create([]);
+                $totalPrice += $product->price * $quantity;
+                $totalQuantity += $quantity;
             }
+
+            $order->update([
+                'total_price' => $totalPrice,
+                'total_quantity' => $totalQuantity,
+            ]);
+
+            $order->payment()->create(['amount' => $totalPrice]);
+            $order->delivery()->create([]);
         }
     }
 }
