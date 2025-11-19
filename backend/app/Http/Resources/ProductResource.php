@@ -5,23 +5,26 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'avatar' => $this->avatar,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'image' => $this->image,
+            'reviews_count' => $this->reviews_count,
+            'rating' => round($this->rating, 1),
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
-            'cart' => $this->whenLoaded('cart.cartProducts.product'),
-            'orders' => $this->whenLoaded('orders.orderProducts.product'),
         ];
     }
 }
