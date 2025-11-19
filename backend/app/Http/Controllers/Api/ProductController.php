@@ -68,12 +68,14 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $product = Product::with(['reviews.user'])
+            ->withCount('reviews')
+            ->withAvg(['reviews as rating'], 'rating')
+            ->findOrFail($id);
+
+        return new ProductResource($product);
     }
 
     /**
