@@ -66,7 +66,7 @@ class ProductCrudController extends CrudController
             'label' => 'Описание',
             'wrapper' => [
                 'element' => 'div',
-                'style'   => 'max-width:500px; white-space: normal; word-wrap: break-word;',
+                'style' => 'max-width:500px; white-space: normal; word-wrap: break-word;',
             ],
         ]);
 
@@ -129,7 +129,7 @@ class ProductCrudController extends CrudController
             'type' => 'number',
             'label' => 'Стоимость',
             'decimals' => 2,
-            'suffix'   => ' ₽',
+            'suffix' => ' ₽',
             'thousands_sep' => ' ',
         ]);
 

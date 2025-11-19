@@ -34,41 +34,41 @@ class UserCrudController extends CrudController
     protected function setupShowOperation()
     {
         CRUD::addColumn([
-            'name'  => 'id',
-            'type'  => 'number',
+            'name' => 'id',
+            'type' => 'number',
             'label' => 'ID',
         ]);
 
         CRUD::addColumn([
-            'name'   => 'avatar',
-            'type'   => 'image',
-            'label'  => 'Аватар',
-            'width'  => '200px',
+            'name' => 'avatar',
+            'type' => 'image',
+            'label' => 'Аватар',
+            'width' => '200px',
             'height' => '200px',
             'prefix' => 'storage/',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'type' => 'text',
             'label' => 'Имя',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'email',
-            'type'  => 'email',
+            'name' => 'email',
+            'type' => 'email',
             'label' => 'Электронная почта',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'created_at',
-            'type'  => 'datetime',
+            'name' => 'created_at',
+            'type' => 'datetime',
             'label' => 'Дата создания',
         ]);
 
         CRUD::addColumn([
-            'name'  => 'updated_at',
-            'type'  => 'datetime',
+            'name' => 'updated_at',
+            'type' => 'datetime',
             'label' => 'Дата обновления',
         ]);
     }

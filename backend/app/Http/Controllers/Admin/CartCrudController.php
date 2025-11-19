@@ -42,11 +42,17 @@ class CartCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'user_id',
-            'type' => 'select',
+            'type' => 'closure',
             'label' => 'Пользователь',
-            'entity' => 'user',
-            'model' => 'App\Models\User',
-            'attribute' => 'name',
+            'function' => function($entry) {
+                $user = $entry->user;
+                if (!$user) {
+                    return '<em>Нет пользователя</em>';
+                }
+                $url = backpack_url('user/'.$user->id.'/show');
+                return '<a href="'.$url.'" target="_blank">'.$user->name.'</a>';
+            },
+            'escaped' => false,
         ]);
 
         CRUD::addColumn([
@@ -92,6 +98,9 @@ class CartCrudController extends CrudController
             'name' => 'total_price',
             'type' => 'number',
             'label' => 'Общая сумма',
+            'decimals' => 2,
+            'suffix' => ' ₽',
+            'thousands_sep' => ' ',
         ]);
 
         CRUD::addColumn([
@@ -132,11 +141,17 @@ class CartCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'user_id',
-            'type' => 'select',
+            'type' => 'closure',
             'label' => 'Пользователь',
-            'entity' => 'user',
-            'model' => 'App\Models\User',
-            'attribute' => 'name',
+            'function' => function($entry) {
+                $user = $entry->user;
+                if (!$user) {
+                    return '<em>Нет пользователя</em>';
+                }
+                $url = backpack_url('user/'.$user->id.'/show');
+                return '<a href="'.$url.'" target="_blank">'.$user->name.'</a>';
+            },
+            'escaped' => false,
         ]);
 
         CRUD::addColumn([

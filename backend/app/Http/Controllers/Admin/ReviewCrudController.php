@@ -35,18 +35,24 @@ class ReviewCrudController extends CrudController
     protected function setupShowOperation(): void
     {
         CRUD::addColumn([
-            'name'  => 'id',
-            'type'  => 'number',
+            'name' => 'id',
+            'type' => 'number',
             'label' => 'ID',
         ]);
 
         CRUD::addColumn([
             'name' => 'user_id',
-            'type' => 'select',
+            'type' => 'closure',
             'label' => 'Пользователь',
-            'entity' => 'user',
-            'model' => 'App\Models\User',
-            'attribute' => 'name',
+            'function'=> function($entry) {
+                $user = $entry->user;
+                if (!$user) {
+                    return '<em>Нет пользователя</em>';
+                }
+                $url = backpack_url('user/'.$user->id.'/show');
+                return '<a href="'.$url.'" target="_blank">'.$user->name.'</a>';
+            },
+            'escaped' => false,
         ]);
 
         CRUD::addColumn([
@@ -121,15 +127,17 @@ class ReviewCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'user_id',
-            'type' => 'text',
+            'type' => 'closure',
             'label' => 'Пользователь',
-            'entity' => 'user',
-            'model' => 'App\Models\User',
-            'attribute' => 'name',
-            'escaped' => false,
-            'value' => function($entry) {
-                return Str::limit($entry->user->name, 15, '…');
+            'function'=> function($entry) {
+                $user = $entry->user;
+                if (!$user) {
+                    return '<em>Нет пользователя</em>';
+                }
+                $url = backpack_url('user/'.$user->id.'/show');
+                return '<a href="'.$url.'" target="_blank">'.$user->name.'</a>';
             },
+            'escaped' => false,
         ]);
 
         CRUD::addColumn([
