@@ -60,14 +60,6 @@ class ProductController extends Controller
         ];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show(string $id)
     {
         $product = Product::with(['reviews.user'])
@@ -76,21 +68,5 @@ class ProductController extends Controller
             ->findOrFail($id);
 
         return new ProductResource($product);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
