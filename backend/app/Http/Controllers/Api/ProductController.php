@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -47,7 +46,7 @@ class ProductController extends Controller
             ->orderBy($sort, $order)
             ->paginate($perPage);
 
-        return [
+        return response()->json([
             'data' => ProductResource::collection($products),
             'meta' => [
                 'current_page' => $products->currentPage(),
@@ -57,16 +56,15 @@ class ProductController extends Controller
                 'next_page_url' => $products->nextPageUrl(),
                 'prev_page_url' => $products->previousPageUrl(),
             ]
-        ];
+        ], 200);
     }
 
-    public function show(string $id)
+    public function show(Product $product)
     {
-        $product = Product::with(['reviews.user'])
-            ->withCount('reviews')
-            ->withAvg(['reviews as rating'], 'rating')
-            ->findOrFail($id);
+        $product->load(['reviews.user'])
+        ->loadCount('reviews')
+        ->loadAvg(['reviews as rating'], 'rating');
 
-        return new ProductResource($product);
+        return response()->json(new ProductResource($product), 200);
     }
 }

@@ -1,26 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/profile', [UserController::class, 'profile']);
-    Route::patch('/profile', [UserController::class, 'update']);
-    Route::patch('/profile/password', [UserController::class, 'updatePassword']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\AuthController;
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+/*
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'profile']);
+    Route::patch('/profile', [ProfileController::class, 'update']);
+    Route::patch('/profile/password', [ProfileController::class, 'updatePassword']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/profile/reviews', [ReviewController::class, 'myReviews']);
-    Route::patch('/profile/reviews/{id}', [ReviewController::class, 'update']);
-    Route::delete('/profile/reviews/{id}', [ReviewController::class, 'destroy']);
     Route::post('/products/{product_id}/reviews', [ReviewController::class, 'store']);
+    Route::get('/reviews', [ReviewController::class, 'myReviews']);
+    Route::patch('/reviews/{id}', [ReviewController::class, 'update']);
+    Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
     Route::post('/reviews/{id}/like', [ReviewController::class, 'like']);
     Route::post('/reviews/{id}/dislike', [ReviewController::class, 'dislike']);
 });

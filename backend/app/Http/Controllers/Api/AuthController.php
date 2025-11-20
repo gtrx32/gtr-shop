@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\LoginRequest;
+use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -47,11 +48,6 @@ class AuthController extends Controller
             'user' => new UserResource($user),
             'token' => $token
         ], 200);
-    }
-
-    public function me(Request $request): JsonResponse
-    {
-        return response()->json(new UserResource($request->user()), 200);
     }
 
     public function logout(Request $request): JsonResponse
