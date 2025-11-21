@@ -56,7 +56,7 @@ class ReviewController extends Controller
         $user = $request->user();
 
         if ($review->user_id !== $user->id) {
-            return response()->json(['message' => 'Review not found'], 404);
+            return response()->json(['message' => 'Not found'], 404);
         }
 
         $data = $request->validated();
@@ -65,5 +65,18 @@ class ReviewController extends Controller
         $review->update($data);
 
         return response()->json(new ReviewResource($review));
+    }
+
+    public function destroy(Review $review)
+    {
+        $user = auth()->user();
+
+        if ($review->user_id !== $user->id) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+
+        $review->delete();
+
+        return response()->json(['message' => 'Review deleted successfully']);
     }
 }
