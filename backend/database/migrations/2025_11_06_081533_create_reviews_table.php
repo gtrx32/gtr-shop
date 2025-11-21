@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('comment');
             $table->unsignedTinyInteger('rating');
-            $table->unsignedInteger('likes')->default(0);
-            $table->unsignedInteger('dislikes')->default(0);
             $table->timestamps();
 
             $table->unique(['user_id', 'product_id']);

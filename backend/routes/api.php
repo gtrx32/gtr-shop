@@ -26,8 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/{product_id}/reviews', [ReviewController::class, 'store']);
     Route::put('/user/reviews/{review}', [ReviewController::class, 'update']);
     Route::delete('/user/reviews/{review}', [ReviewController::class, 'destroy']);
-    Route::post('/reviews/{id}/like', [ReviewController::class, 'like']);
-    Route::post('/reviews/{id}/dislike', [ReviewController::class, 'dislike']);
+    Route::post('/reviews/{review}/like', [ReviewController::class, 'like']);
+    Route::post('/reviews/{review}/dislike', [ReviewController::class, 'dislike']);
 });
 
 /*

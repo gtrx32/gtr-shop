@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\ReviewMark;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -28,10 +29,22 @@ class ReviewSeeder extends Seeder
         $pairs = collect($pairs)->shuffle()->take(50);
 
         foreach ($pairs as [$userId, $productId]) {
-            Review::factory()->create([
+            $review = Review::factory()->create([
                 'user_id' => $userId,
                 'product_id' => $productId,
             ]);
+
+            $otherUsers = User::where('id', '!=', $userId)
+                ->inRandomOrder()
+                ->take(rand(0, 20))
+                ->get();
+
+            $marks = $otherUsers->map(fn($other) => new ReviewMark([
+                'user_id' => $other->id,
+                'type' => rand(0, 1) ? 'like' : 'dislike',
+            ]));
+
+            $review->marks()->saveMany($marks);
         }
     }
 }

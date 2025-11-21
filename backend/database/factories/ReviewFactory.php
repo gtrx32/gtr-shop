@@ -20,8 +20,6 @@ class ReviewFactory extends Factory
             'title' => fake()->sentence(7),
             'comment' => fake()->paragraph(2),
             'rating' => fake()->numberBetween(1, 5),
-            'likes' => fake()->numberBetween(0, 100),
-            'dislikes' => fake()->numberBetween(0, 50),
         ];
     }
 }

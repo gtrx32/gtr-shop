@@ -67,6 +67,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function marks(): HasMany
+    {
+        return $this->hasMany(ReviewMark::class);
+    }
+
     public function setPasswordAttribute($value)
     {
         if ($value) {
