@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/{product_id}/reviews', [ReviewController::class, 'store']);
-    Route::get('/user/reviews', [ReviewController::class, 'myReviews']);
+    Route::get('/user/reviews', [ReviewController::class, 'userReviews']);
     Route::patch('/user/reviews/{id}', [ReviewController::class, 'update']);
     Route::delete('/user/reviews/{id}', [ReviewController::class, 'destroy']);
     Route::post('/reviews/{id}/like', [ReviewController::class, 'like']);
