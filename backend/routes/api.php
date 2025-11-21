@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProfileController;
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
@@ -13,13 +14,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-/*
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::patch('/profile', [ProfileController::class, 'update']);
     Route::patch('/profile/password', [ProfileController::class, 'updatePassword']);
 });
 
+/*
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/{product_id}/reviews', [ReviewController::class, 'store']);
     Route::get('/reviews', [ReviewController::class, 'myReviews']);
