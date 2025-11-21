@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\UserController;
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
@@ -15,9 +15,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'profile']);
-    Route::patch('/profile', [ProfileController::class, 'update']);
-    Route::patch('/profile/password', [ProfileController::class, 'updatePassword']);
+    Route::get('/user', [UserController::class, 'show']);
+    Route::patch('/user', [UserController::class, 'update']);
 });
 
 /*

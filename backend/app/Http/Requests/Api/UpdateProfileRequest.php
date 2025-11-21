@@ -25,6 +25,8 @@ class UpdateProfileRequest extends FormRequest
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|string|email|max:255|unique:users,email,' . $this->user()->id,
             'avatar' => 'nullable|image|max:2048',
+            'password' => 'nullable|string|confirmed|min:8',
+            'current_password' => 'nullable|required_with:password|string',
         ];
     }
 }
