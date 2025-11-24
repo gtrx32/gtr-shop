@@ -20,8 +20,6 @@ class Review extends Model
         'title',
         'comment',
         'rating',
-        'likes',
-        'dislikes'
     ];
 
     public function user(): BelongsTo

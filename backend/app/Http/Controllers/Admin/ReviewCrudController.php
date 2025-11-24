@@ -87,18 +87,6 @@ class ReviewCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'likes',
-            'type' => 'number',
-            'label' => 'Лайки',
-        ]);
-
-        CRUD::addColumn([
-            'name' => 'dislikes',
-            'type' => 'number',
-            'label' => 'Дизлайки',
-        ]);
-
-        CRUD::addColumn([
             'name' => 'created_at',
             'type' => 'datetime',
             'label' => 'Дата создания',
@@ -227,20 +215,6 @@ class ReviewCrudController extends CrudController
             'type' => 'number',
             'label' => 'Оценка',
             'attributes' => ['min' => 0, 'max' => 5],
-        ]);
-
-        CRUD::addField([
-            'name' => 'likes',
-            'type' => 'number',
-            'label' => 'Лайки',
-            'default' => 0,
-        ]);
-
-        CRUD::addField([
-            'name' => 'dislikes',
-            'type' => 'number',
-            'label' => 'Дизлайки',
-            'default' => 0,
         ]);
     }
 

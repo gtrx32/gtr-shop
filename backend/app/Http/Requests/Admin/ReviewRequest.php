@@ -30,8 +30,6 @@ class ReviewRequest extends FormRequest
             'title'      => 'required|string|max:255',
             'comment'    => 'required|string',
             'rating'     => 'required|integer|min:1|max:5',
-            'likes'      => 'nullable|integer|min:0',
-            'dislikes'   => 'nullable|integer|min:0',
         ];
     }
 
