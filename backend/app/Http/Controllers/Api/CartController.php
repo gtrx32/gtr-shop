@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\AddToCartRequest;
+use App\Http\Requests\Api\CartItemRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class CartController extends Controller
         return response()->json(new CartResource($cart));
     }
 
-    public function add(AddToCartRequest $request)
+    public function add(CartItemRequest $request)
     {
         $data = $request->validated();
 
@@ -41,7 +41,7 @@ class CartController extends Controller
         return response()->json(new CartResource($cart));
     }
 
-    public function remove(AddToCartRequest $request)
+    public function remove(CartItemRequest $request)
     {
         $data = $request->validated();
 
