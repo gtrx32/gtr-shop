@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\AuthController;
@@ -37,11 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/cart/remove', [CartController::class, 'remove']);
 });
 
-/*
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders', [OrderController::class, 'index']);
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::post('/orders/create', [OrderController::class, 'store']);
     Route::post('/orders/cancel', [OrderController::class, 'cancel']);
 });
-*/

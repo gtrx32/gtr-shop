@@ -23,8 +23,8 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'stock' => $this->stock,
             'image' => $this->image ? Storage::disk('public')->url($this->image) : null,
-            'reviews_count' => $this->reviews_count,
-            'rating' => round($this->rating, 1),
+            'reviews_count' => $this->when(isset($this->reviews_count), $this->reviews_count),
+            'rating' => $this->when(isset($this->rating), round($this->rating, 1)),
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
         ];
     }
