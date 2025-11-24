@@ -18,14 +18,14 @@ class CartResource extends JsonResource
             'id' => $this->id,
             'total_quantity' => $this->total_quantity,
             'total_price' => $this->total_price,
-            'products' => $this->cartItems->map(function ($item) {
-                return [
+            'products' => $this->whenLoaded('cartItems', function () {
+                return $this->cartItems->map(fn($item) => [
                     'quantity' => $item->quantity,
                     'price' => $item->product->price,
                     'total' => $item->quantity * $item->product->price,
                     'product' => new ProductResource($item->product),
-                ];
-            })->values(),
+                ])->values();
+            }),
         ];
     }
 }
