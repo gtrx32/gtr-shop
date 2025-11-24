@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\AuthController;
@@ -30,14 +31,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/reviews/{review}/dislike', [ReviewController::class, 'dislike']);
 });
 
-/*
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/cart', [CartController::class, 'show']);
     Route::post('/cart/add', [CartController::class, 'add']);
     Route::post('/cart/update', [CartController::class, 'update']);
     Route::post('/cart/remove', [CartController::class, 'remove']);
 });
 
+/*
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders', [OrderController::class, 'index']);
     Route::get('/orders/{id}', [OrderController::class, 'show']);

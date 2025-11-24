@@ -36,13 +36,11 @@ class Cart extends Model
 
         if ($cartProduct) {
             $cartProduct->quantity += $quantity;
-            $cartProduct->price = $product->price;
             $cartProduct->save();
         } else {
             $this->cartProducts()->create([
                 'product_id' => $product->id,
-                'quantity' => $quantity,
-                'price' => $product->price
+                'quantity' => $quantity
             ]);
         }
 
@@ -82,12 +80,20 @@ class Cart extends Model
 
     public function recalculate(): self
     {
-        $totals = $this->cartProducts()
-            ->selectRaw('SUM(quantity) as total_quantity, SUM(price * quantity) as total_price')
-            ->first();
-        $this->total_quantity = $totals->total_quantity ?? 0;
-        $this->total_price = $totals->total_price ?? 0;
+        $this->load('cartProducts.product');
+
+        $totalQuantity = 0;
+        $totalPrice = 0;
+
+        foreach ($this->cartProducts as $item) {
+            $totalQuantity += $item->quantity;
+            $totalPrice += $item->quantity * $item->product->price;
+        }
+
+        $this->total_quantity = $totalQuantity;
+        $this->total_price = $totalPrice;
         $this->save();
+
         return $this;
     }
 }

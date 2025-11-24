@@ -65,8 +65,8 @@ class CartCrudController extends CrudController
 
                 $rows = collect($entry->cartProducts)->map(function($cp) {
                     $productUrl = backpack_url('product/'.$cp->product->id.'/show');
-                    $price = number_format($cp->price, 2, ',', ' ') . ' ₽';
-                    $totalPrice = number_format($cp->price * $cp->quantity, 2, ',', ' ') . ' ₽';
+                    $price = number_format($cp->product->price, 2, ',', ' ') . ' ₽';
+                    $totalPrice = number_format($cp->product->price * $cp->quantity, 2, ',', ' ') . ' ₽';
 
                     return '<tr>
                         <td><a href="'.$productUrl.'" target="_blank">'.$cp->product->name.'</a></td>
