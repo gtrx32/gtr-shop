@@ -87,15 +87,15 @@ class OrderCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'orderProducts',
+            'name' => 'orderItems',
             'type' => 'closure',
             'label' => 'Товары',
             'function' => function($entry) {
-                if ($entry->orderProducts->isEmpty()) {
+                if ($entry->orderItems->isEmpty()) {
                     return '<em>Нет товаров</em>';
                 }
 
-                $rows = collect($entry->orderProducts)->map(function($op) {
+                $rows = collect($entry->orderItems)->map(function($op) {
                     $productUrl = backpack_url('product/'.$op->product->id.'/show');
                     $price = number_format($op->price, 2, ',', ' ') . ' ₽';
                     $totalPrice = number_format($op->price * $op->quantity, 2, ',', ' ') . ' ₽';

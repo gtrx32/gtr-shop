@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Cart;
-use App\Models\CartProduct;
+use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

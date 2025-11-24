@@ -12,7 +12,7 @@ class CartController extends Controller
     {
         $cart = $request->user()
             ->cart()
-            ->with(['cartProducts.product'])
+            ->with(['cartItems.product'])
             ->first();
 
         if (!$cart) {

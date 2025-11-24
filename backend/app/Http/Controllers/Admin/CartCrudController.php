@@ -55,15 +55,15 @@ class CartCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'cartProducts',
+            'name' => 'cartItems',
             'type' => 'closure',
             'label' => 'Товары',
             'function' => function($entry) {
-                if ($entry->cartProducts->isEmpty()) {
+                if ($entry->cartItems->isEmpty()) {
                     return '<em>Нет товаров</em>';
                 }
 
-                $rows = collect($entry->cartProducts)->map(function($cp) {
+                $rows = collect($entry->cartItems)->map(function($cp) {
                     $productUrl = backpack_url('product/'.$cp->product->id.'/show');
                     $price = number_format($cp->product->price, 2, ',', ' ') . ' ₽';
                     $totalPrice = number_format($cp->product->price * $cp->quantity, 2, ',', ' ') . ' ₽';

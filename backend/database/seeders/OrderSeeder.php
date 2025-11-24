@@ -30,7 +30,7 @@ class OrderSeeder extends Seeder
             foreach ($productsForOrder as $product) {
                 $quantity = rand(1, 3);
 
-                $order->orderProducts()->create([
+                $order->orderItems()->create([
                     'product_id' => $product->id,
                     'quantity' => $quantity,
                     'price' => $product->price,

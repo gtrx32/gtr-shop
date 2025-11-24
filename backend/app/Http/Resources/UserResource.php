@@ -21,8 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'avatar' => $this->avatar ? Storage::disk('public')->url($this->avatar) : null,
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
-            'cart' => $this->whenLoaded('cart.cartProducts.product'),
-            'orders' => $this->whenLoaded('orders.orderProducts.product'),
+            'cart' => $this->whenLoaded('cart.cartItems.product'),
+            'orders' => $this->whenLoaded('orders.orderItems.product'),
         ];
     }
 }

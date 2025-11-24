@@ -25,20 +25,20 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cartProducts(): HasMany
+    public function cartItems(): HasMany
     {
-        return $this->hasMany(CartProduct::class);
+        return $this->hasMany(CartItem::class);
     }
 
     public function addProduct(Product $product, int $quantity = 1): self
     {
-        $cartProduct = $this->cartProducts()->firstWhere('product_id', $product->id);
+        $cartItem = $this->cartItems()->firstWhere('product_id', $product->id);
 
-        if ($cartProduct) {
-            $cartProduct->quantity += $quantity;
-            $cartProduct->save();
+        if ($cartItem) {
+            $cartItem->quantity += $quantity;
+            $cartItem->save();
         } else {
-            $this->cartProducts()->create([
+            $this->cartItems()->create([
                 'product_id' => $product->id,
                 'quantity' => $quantity
             ]);
@@ -51,17 +51,17 @@ class Cart extends Model
 
     public function removeProduct(Product $product, int $quantity = null): self
     {
-        $cartProduct = $this->cartProducts()->firstWhere('product_id', $product->id);
+        $cartItem = $this->cartItems()->firstWhere('product_id', $product->id);
 
-        if (!$cartProduct) {
+        if (!$cartItem) {
             return $this;
         }
 
-        if ($quantity === null || $quantity >= $cartProduct->quantity) {
-            $cartProduct->delete();
+        if ($quantity === null || $quantity >= $cartItem->quantity) {
+            $cartItem->delete();
         } else {
-            $cartProduct->quantity -= $quantity;
-            $cartProduct->save();
+            $cartItem->quantity -= $quantity;
+            $cartItem->save();
         }
 
         $this->recalculate();
@@ -71,7 +71,7 @@ class Cart extends Model
 
     public function clear(): self
     {
-        $this->cartProducts()->delete();
+        $this->cartItems()->delete();
         $this->total_quantity = 0;
         $this->total_price = 0;
         $this->save();
@@ -80,12 +80,12 @@ class Cart extends Model
 
     public function recalculate(): self
     {
-        $this->load('cartProducts.product');
+        $this->load('cartItems.product');
 
         $totalQuantity = 0;
         $totalPrice = 0;
 
-        foreach ($this->cartProducts as $item) {
+        foreach ($this->cartItems as $item) {
             $totalQuantity += $item->quantity;
             $totalPrice += $item->quantity * $item->product->price;
         }
