@@ -15,9 +15,9 @@ class OrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'total_price' => $this->total_price,
-            'total_quantity' => $this->total_quantity,
+            'id' => (int) $this->id,
+            'total_price' => round($this->total_price, 2),
+            'total_quantity' => (int) $this->total_quantity,
             'status' => $this->status,
             'comment' => $this->comment,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
@@ -26,9 +26,9 @@ class OrderResource extends JsonResource
             'delivery' => new DeliveryResource($this->whenLoaded('delivery')),
             'products' => $this->whenLoaded('orderItems', function () {
                 return $this->orderItems->map(fn($item) => [
-                    'quantity' => $item->quantity,
-                    'price' => $item->price,
-                    'total' => $item->quantity * $item->price,
+                    'quantity' => (int) $item->quantity,
+                    'price' => round($item->price, 2),
+                    'total' => round($item->quantity * $item->price, 2),
                     'product' => new ProductResource($item->product),
                 ])->values();
             }),

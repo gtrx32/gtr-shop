@@ -20,12 +20,12 @@ class ReviewResource extends JsonResource
         ]);
 
         return [
-            'id' => $this->id,
+            'id' => (int) $this->id,
             'title' => $this->title,
             'comment' => $this->comment,
-            'rating' => $this->rating,
-            'likes' => $this->likes,
-            'dislikes' => $this->dislikes,
+            'rating' => (int) $this->rating,
+            'likes' => (int) $this->likes,
+            'dislikes' => (int) $this->dislikes,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'user' => new UserResource($this->whenLoaded('user')),
         ];

@@ -40,7 +40,6 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         $data = $request->validated();
-
         $user = $request->user();
 
         $order = $user->orders()->create([
@@ -53,8 +52,19 @@ class OrderController extends Controller
         $totalPrice = 0;
         $totalQuantity = 0;
 
-        foreach ($data['items'] as $item) {
-            $product = Product::find($item['product_id']);
+        $items = collect($data['items'])
+            ->groupBy('product_id')
+            ->map(fn($group) => [
+                'product_id' => $group[0]['product_id'],
+                'quantity' => array_sum(array_column($group->toArray(), 'quantity')),
+            ])
+            ->values();
+
+        $productIds = $items->pluck('product_id')->all();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
+        foreach ($items as $item) {
+            $product = $products[$item['product_id']];
 
             $order->orderItems()->create([
                 'product_id' => $product->id,
@@ -79,6 +89,8 @@ class OrderController extends Controller
         $order->delivery()->create([
             'status' => DeliveryStatus::Pending,
         ]);
+
+        $order->load(['orderItems.product', 'payment', 'delivery']);
 
         return response()->json(new OrderResource($order), 201);
     }
