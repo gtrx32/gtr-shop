@@ -1,0 +1,39 @@
+@font-face {
+  font-style: normal;
+  font-weight: 700;
+  src: url('/assets/fonts/BlazmaBold.ttf') format('truetype');
+  font-family: 'Blazma';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: italic;
+  font-weight: 700;
+  src: url('/assets/fonts/BlazmaBoldItalic.ttf') format('truetype');
+  font-family: 'Blazma';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 300;
+  src: url('/assets/fonts/ComfortaaLight.ttf') format('truetype');
+  font-family: 'Comfortaa';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/ComfortaaRegular.ttf') format('truetype');
+  font-family: 'Comfortaa';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 700;
+  src: url('/assets/fonts/ComfortaaBold.ttf') format('truetype');
+  font-family: 'Comfortaa';
+  font-display: swap;
+}
