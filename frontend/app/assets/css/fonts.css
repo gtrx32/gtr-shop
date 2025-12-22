@@ -17,23 +17,31 @@
 @font-face {
   font-style: normal;
   font-weight: 300;
-  src: url('/assets/fonts/ComfortaaLight.ttf') format('truetype');
-  font-family: 'Comfortaa';
+  src: url('/assets/fonts/CeraPro-Light.ttf') format('truetype');
+  font-family: 'CeraPro';
   font-display: swap;
 }
 
 @font-face {
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/fonts/ComfortaaRegular.ttf') format('truetype');
-  font-family: 'Comfortaa';
+  src: url('/assets/fonts/CeraPro-Regular.ttf') format('truetype');
+  font-family: 'CeraPro';
   font-display: swap;
 }
 
 @font-face {
   font-style: normal;
-  font-weight: 700;
-  src: url('/assets/fonts/ComfortaaBold.ttf') format('truetype');
-  font-family: 'Comfortaa';
+  font-weight: 500;
+  src: url('/assets/fonts/CeraPro-Medium.ttf') format('truetype');
+  font-family: 'CeraPro';
   font-display: swap;
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: 700;
+    src: url('/assets/fonts/CeraPro-Bold.ttf') format('truetype');
+    font-family: 'CeraPro';
+    font-display: swap;
 }

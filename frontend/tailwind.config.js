@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         blazma: ['Blazma', 'sanf-serif'],
-        comfortaa: ['Comfortaa', 'sans-serif'],
+        comfortaa: ['CeraPro', 'sans-serif'],
       },
     },
   },
