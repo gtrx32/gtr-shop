@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen grid grid-rows-[auto_1fr_auto] gap-6 bg-gray-50">
+  <div class="min-h-[100dvh] flex flex-col gap-6 bg-gray-50">
     <AppHeader />
 
-    <main class="max-w-7xl mx-auto">
+    <main class="flex-1 max-w-7xl mx-auto w-full">
       <slot />
     </main>
 
