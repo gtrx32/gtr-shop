@@ -32,6 +32,14 @@
 
 @font-face {
   font-style: normal;
+  font-weight: 500;
+  src: url('/assets/fonts/CeraPro-Medium.ttf') format('truetype');
+  font-family: 'CeraPro';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
   font-weight: 700;
   src: url('/assets/fonts/CeraPro-Bold.ttf') format('truetype');
   font-family: 'CeraPro';
