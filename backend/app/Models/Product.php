@@ -26,7 +26,7 @@ class Product extends Model
     protected static function booted(): void
     {
         static::creating(function ($product) {
-            if (empty($product->slug)) {
+            if (empty($product->slug) && !empty($product->name)) {
                 $product->slug = Str::slug($product->name);
             }
         });

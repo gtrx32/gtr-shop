@@ -42,7 +42,7 @@ class ProductCrudController extends CrudController
         CRUD::addColumn([
             'name' => 'image',
             'type' => 'image',
-            'label' => 'Картинка',
+            'label' => 'Изображение',
             'width' => '200px',
             'height' => '200px',
             'prefix' => 'storage/',
