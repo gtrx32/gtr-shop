@@ -24,11 +24,12 @@ class AuthController extends Controller
             'password' => Hash::make($credentials['password']),
         ]);
 
-        $token = $user->createToken('api-token')->plainTextToken;
+        Auth::login($user);
+
+        $request->session()->regenerate();
 
         return response()->json([
             'user' => new UserResource($user),
-            'token' => $token,
         ], 201);
     }
 
@@ -40,19 +41,20 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        $user = Auth::user();
-
-        $token = $user->createToken('api-token')->plainTextToken;
+        $request->session()->regenerate();
 
         return response()->json([
-            'user' => new UserResource($user),
-            'token' => $token
+            'user' => new UserResource($request->user()),
         ], 200);
     }
 
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->tokens()->delete();
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return response()->json([
             'message' => 'Logged out successfully'

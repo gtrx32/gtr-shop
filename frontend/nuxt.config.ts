@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    backendUrl: process.env.BACKEND_URL,
+  },
+
   app: {
     head: {
       charset: 'utf-8',
