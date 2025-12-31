@@ -20,8 +20,8 @@
         <div class="hidden md:flex items-center gap-2 sm:gap-4 lg:gap-8">
           <div class="flex items-center gap-2 cursor-pointer relative" @click="toggleUserMenu" ref="menuRef">
             <div class="hidden lg:flex flex-col leading-none text-right select-none">
-              <span>Иван Иванов</span>
-              <span class="text-sm text-neutral-500">email@example.com</span>
+              <span>{{ user?.name }}</span>
+              <span class="text-sm text-neutral-500">{{ user?.email }}</span>
             </div>
             <Icon name="mdi:user" class="text-3xl sm:text-4xl scale-110"/>
             <div
@@ -31,7 +31,7 @@
               <nuxt-link class="block px-4 py-2" to="/profile">Профиль</nuxt-link>
               <nuxt-link class="block px-4 py-2" to="/orders">Мои заказы</nuxt-link>
               <nuxt-link class="block px-4 py-2" to="/reviews">Мои отзывы</nuxt-link>
-              <button class="block flex gap-2 items-center px-4 py-2 w-full">
+              <button @click="logout" class="block flex gap-2 items-center px-4 py-2 w-full">
                 Выйти
                 <Icon name="mdi:exit-to-app" class="text-xl"/>
               </button>
@@ -86,8 +86,8 @@
 
         <div class="rounded-lg bg-white border border-neutral-200 shadow-sm overflow-hidden">
           <div class="px-4 py-3">
-            <div class="font-medium leading-tight">Иван Иванов</div>
-            <div class="text-sm text-neutral-500">email@example.com</div>
+            <div class="font-medium leading-tight">{{ user?.name }}</div>
+            <div class="text-sm text-neutral-500">{{ user?.email }}</div>
           </div>
           <div class="h-px bg-neutral-200"></div>
 
@@ -110,6 +110,8 @@
 
 <script setup lang="ts">
 import {ref, onMounted, onBeforeUnmount} from "vue";
+const { user, loading, fetchUser, logout } = useAuth()
+await fetchUser()
 
 const isUserModalOpen = ref(false);
 const isMobileMenuOpen = ref(false);

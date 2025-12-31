@@ -1,7 +1,16 @@
-import { defineEventHandler, proxyRequest, getRouterParam } from 'h3'
+import {
+    defineEventHandler,
+    proxyRequest,
+    getRouterParam,
+    getRequestHeader,
+} from 'h3'
 
 export default defineEventHandler((event) => {
     const { backendUrl } = useRuntimeConfig()
     const path = getRouterParam(event, 'path') || ''
-    return proxyRequest(event, `${backendUrl}/api/${path}`)
+    const cookie = getRequestHeader(event, 'cookie')
+
+    return proxyRequest(event, `${backendUrl}/api/${path}`, {
+        headers: cookie ? { cookie } : {},
+    })
 })
