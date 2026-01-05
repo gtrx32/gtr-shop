@@ -18,6 +18,6 @@ export default defineNuxtConfig({
         },
     },
 
-    css: ['~/assets/css/main.css', '~/assets/css/fonts.css', '~/assets/css/reset.css'],
+    css: ['~/assets/css/main.css', '~/assets/css/fonts.css'],
     modules: ['@nuxtjs/tailwindcss', '@nuxt/icon'],
 });
