@@ -11,46 +11,19 @@ type RegisterData = {
 }
 
 export function useAuth() {
+    const { apiFetch } = useApi()
+
     const user = useState<any | null>('auth-user', () => null)
     const loading = useState<boolean>('auth-loading', () => false)
     const error = useState<string | null>('auth-error', () => null)
 
-    function ssrHeaders() {
-        return import.meta.server
-            ? useRequestHeaders(['cookie', 'origin', 'referer'])
-            : undefined
-    }
-
-    function xsrfHeader() {
-        if (import.meta.server) return {}
-
-        const match = document.cookie.match(/XSRF-TOKEN=([^;]+)/)
-
-        if (!match?.[1]) return {}
-
-        return {
-            'X-XSRF-TOKEN': decodeURIComponent(match[1]),
-        }
-    }
-
-
-    async function authFetch<T>(url: string, options: any = {}) {
-        return $fetch<T>(url, {
-            credentials: 'include',
-            ...options,
-            headers: {
-                ...ssrHeaders(),
-                ...xsrfHeader(),
-                ...options.headers,
-            },
-        })
-    }
+    const isAuthenticated = computed(() => !!user.value)
 
     async function fetchUser() {
         if (user.value) return user.value
 
         try {
-            user.value = await authFetch('/api/user')
+            user.value = await apiFetch('/api/user')
             return user.value
         } catch {
             user.value = null
@@ -63,11 +36,13 @@ export function useAuth() {
         error.value = null
 
         try {
-            await authFetch('/sanctum/csrf-cookie')
-            await authFetch('/api/login', {
+            await apiFetch('/sanctum/csrf-cookie')
+            await apiFetch('/api/login', {
                 method: 'POST',
                 body: credentials,
             })
+
+            user.value = null
             await fetchUser()
         } catch (e: any) {
             error.value = e?.data?.message || 'Login failed'
@@ -82,11 +57,12 @@ export function useAuth() {
         error.value = null
 
         try {
-            await authFetch('/sanctum/csrf-cookie')
-            await authFetch('/api/register', {
+            await apiFetch('/sanctum/csrf-cookie')
+            await apiFetch('/api/register', {
                 method: 'POST',
                 body: data,
             })
+            user.value = null
             await fetchUser()
         } catch (e: any) {
             error.value = e?.data?.message || 'Register failed'
@@ -97,12 +73,10 @@ export function useAuth() {
     }
 
     async function logout() {
-        await authFetch('/api/logout', { method: 'POST' })
+        await apiFetch('/api/logout', { method: 'POST' })
         user.value = null
         navigateTo('/login')
     }
-
-    const isAuthenticated = computed(() => !!user.value)
 
     return {
         user,

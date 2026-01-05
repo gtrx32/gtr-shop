@@ -6,7 +6,7 @@ import {
 } from 'h3'
 
 export default defineEventHandler((event) => {
-    const { backendUrl } = useRuntimeConfig()
+    const { public: { backendUrl } } = useRuntimeConfig()
     const path = getRouterParam(event, 'path') || ''
     const cookie = getRequestHeader(event, 'cookie')
 
