@@ -69,7 +69,7 @@ async function handleLogout() {
       </UiButton>
     </div>
 
-    <div v-if="isMobileMenuOpen" class="md:hidden border-t border-neutral-200 bg-gray-50">
+    <div v-if="isMobileMenuOpen" class="md:hidden border-t border-zinc-200 bg-gray-50">
       <div class="px-4 sm:px-8 py-4 space-y-3">
         <nav class="flex flex-col gap-1">
           <nuxt-link @click="closeMobile" to="/" class="py-2">Главная</nuxt-link>
@@ -88,7 +88,7 @@ async function handleLogout() {
             <Icon name="mdi:user" class="text-3xl" />
             <div>
               <div class="font-medium leading-tight">{{ user.name }}</div>
-              <div class="text-sm text-neutral-500">{{ user.email }}</div>
+              <div class="text-sm text-zinc-500">{{ user.email }}</div>
             </div>
           </UiButton>
 

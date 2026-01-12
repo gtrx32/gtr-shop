@@ -13,15 +13,10 @@ const component = computed(() =>
 <template>
   <component
       :is="component"
-      class="ui-button"
+      class="rounded-lg border border-zinc-200 bg-white shadow-sm leading-none"
       v-bind="$attrs"
   >
     <slot />
   </component>
 </template>
 
-<style scoped>
-.ui-button {
-  @apply rounded-lg border border-neutral-200 bg-white shadow-sm leading-none;
-}
-</style>

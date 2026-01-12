@@ -1,5 +1,30 @@
-* {
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+    --font-blazma: 'Blazma', system-ui, sans-serif;
+    --font-ceraPro: 'CeraPro', system-ui, sans-serif;
+}
+
+:root {
+    --ui-text-dimmed: var(--color-zinc-400);
+    --ui-text-muted: var(--color-zinc-500);
+    --ui-text-toned: var(--color-zinc-600);
+    --ui-text: var(--color-zinc-700);
+    --ui-text-highlighted: var(--color-zinc-900);
+    --ui-text-inverted: #fff;
+    --ui-bg: #fff;
+    --ui-bg-muted: var(--color-zinc-50);
+    --ui-bg-elevated: var(--color-zinc-100);
+    --ui-bg-accented: var(--color-zinc-200);
+    --ui-bg-inverted: var(--color-zinc-900);
+    --ui-border: var(--color-zinc-200);
+    --ui-border-muted: var(--color-zinc-200);
+    --ui-border-accented: var(--color-zinc-300);
+    --ui-border-inverted: var(--color-zinc-900);
+}
+
+html {
     font-family: 'CeraPro', sans-serif;
     font-size: 16px;
-    color: rgba(64, 64, 64, 1);
 }
