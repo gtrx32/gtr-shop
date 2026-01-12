@@ -19,7 +19,7 @@ class BannerFactory extends Factory
      */
     public function definition(): array
     {
-        $image = Http::withoutVerifying()->get('https://picsum.dev/1600/600')->body();
+        $image = Http::withoutVerifying()->get('https://picsum.dev/1280/720')->body();
         $filename = 'banners/' . Str::random(10) . '.jpg';
         Storage::disk('public')->put($filename, $image);
 
