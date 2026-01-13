@@ -7,7 +7,7 @@ import AppFooter from '../components/layout/AppFooter.vue';
   <div class="min-h-[100dvh] flex flex-col gap-6 bg-gray-50">
     <AppHeader />
 
-    <main class="flex-1 max-w-7xl mx-auto w-full">
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6">
       <slot />
     </main>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Banner } from '~/types/banner'
+import type {Banner} from '~/types/banner'
 
 interface Props {
   banners: Banner[]
@@ -21,11 +21,13 @@ withDefaults(defineProps<Props>(), {
         arrows
         dots
         :ui="{
-        viewport: 'overflow-hidden rounded-xl',
-        dot: 'w-6 h-2'
-      }"
+          viewport: 'overflow-hidden rounded-xl',
+          prev: 'start-4! min-[1350px]:-start-12!',
+          next: 'end-4! min-[1350px]:-end-12!',
+          dot: 'w-6 h-2'
+        }"
     >
-      <UiSlide :banner="item as Banner" />
+      <UiBannerSlide :banner="item as Banner"/>
     </UCarousel>
   </div>
 </template>
