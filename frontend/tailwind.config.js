@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        blazma: ['Blazma', 'sanf-serif'],
+        blazma: ['Blazma', 'sans-serif'],
         ceraPro: ['CeraPro', 'sans-serif'],
       },
     },
