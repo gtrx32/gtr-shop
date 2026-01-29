@@ -1,7 +1,7 @@
-export const useApi = () => {
+export default defineNuxtPlugin((nuxtApp) => {
     const config = useRuntimeConfig()
 
-    return $fetch.create({
+    const api = $fetch.create({
         baseURL: config.public.backendUrl,
         credentials: 'include',
 
@@ -10,21 +10,15 @@ export const useApi = () => {
             headers.set('accept', 'application/json')
 
             if (import.meta.server) {
-                const requestHeaders = useRequestHeaders([
-                    'cookie',
-                    'referer',
-                    'origin',
-                    'x-forwarded-proto',
-                    'x-forwarded-host',
-                    'host'
-                ])
+                const request = nuxtApp.ssrContext?.event.node.req
+                const requestHeaders = request?.headers || {}
 
                 if (requestHeaders.cookie) headers.set('cookie', requestHeaders.cookie)
                 if (requestHeaders.referer) headers.set('referer', requestHeaders.referer)
 
                 if (requestHeaders.origin) {
                     headers.set('origin', requestHeaders.origin)
-                } else if (requestHeaders.referer?.startsWith('http')) {
+                } else if (requestHeaders.referer && requestHeaders.referer.startsWith('http')) {
                     headers.set('origin', new URL(requestHeaders.referer).origin)
                 } else {
                     const proto = requestHeaders['x-forwarded-proto'] || 'http'
@@ -32,7 +26,8 @@ export const useApi = () => {
                     if (host) headers.set('origin', `${proto}://${host}`)
                 }
 
-                const xsrf = (requestHeaders.cookie || '')
+                const cookie = requestHeaders.cookie || ''
+                const xsrf = cookie
                     .split('; ')
                     .find(c => c.startsWith('XSRF-TOKEN='))
                     ?.split('=')[1]
@@ -48,4 +43,6 @@ export const useApi = () => {
             options.headers = headers
         }
     })
-}
+
+    nuxtApp.provide('api', api)
+})
