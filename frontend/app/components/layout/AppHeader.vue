@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const { user, fetchUser, logout } = useAuth()
-await fetchUser()
+const { user, loadUser, logout } = useAuth()
+await loadUser()
 
 const isMobileMenuOpen = ref(false)
 

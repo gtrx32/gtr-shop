@@ -1,89 +1,107 @@
-type Credentials = {
-    email: string
-    password: string
-}
+export const useAuth = () => {
+    const api = useApi()
 
-type RegisterData = {
-    name: string
-    email: string
-    password: string
-    password_confirmation: string
-}
+    const user = useState<any | null>('auth:user', () => null)
+    const loaded = useState<boolean>('auth:loaded', () => false)
+    const isAuth = computed(() => !!user.value)
 
-export function useAuth() {
-    const { apiFetch } = useApi()
+    const actionPending = useState<boolean>('auth:actionPending', () => false)
+    const userPending = useState<boolean>('auth:userPending', () => false)
+    const pending = computed(() => actionPending.value || userPending.value)
 
-    const user = useState<any | null>('auth-user', () => null)
-    const loading = useState<boolean>('auth-loading', () => false)
-    const error = useState<string | null>('auth-error', () => null)
+    const error = useState<string | null>('auth:error', () => null)
 
-    const isAuthenticated = computed(() => !!user.value)
-
-    async function fetchUser() {
-        if (user.value) return user.value
-
-        try {
-            user.value = await apiFetch('/api/user')
-            return user.value
-        } catch {
-            user.value = null
-            return null
-        }
+    const ensureCsrf = async () => {
+        const token = useCookie('XSRF-TOKEN').value
+        if (token) return
+        await api('/sanctum/csrf-cookie', { method: 'GET' })
     }
 
-    async function login(credentials: Credentials) {
-        loading.value = true
+    const fetchUser = async ({ force = false } = {}) => {
+        if (userPending.value) return user.value
+        if (!force && loaded.value) return user.value
+
+        userPending.value = true
         error.value = null
 
         try {
-            await apiFetch('/sanctum/csrf-cookie')
-            await apiFetch('/api/login', {
-                method: 'POST',
-                body: credentials,
-            })
-
-            user.value = null
-            await fetchUser()
+            user.value = await api('/api/user', { method: 'GET' })
         } catch (e: any) {
-            error.value = e?.data?.message || 'Login failed'
-            throw e
+            user.value = null
+            error.value = e?.data?.message || e?.message || 'Request failed'
         } finally {
-            loading.value = false
+            loaded.value = true
+            userPending.value = false
         }
+
+        return user.value
     }
 
-    async function register(data: RegisterData) {
-        loading.value = true
+    const loadUser = () => fetchUser()
+
+    const refreshUser = () => fetchUser({ force: true })
+
+    const login = async (payload: any) => {
+        if (actionPending.value) return
+
+        actionPending.value = true
         error.value = null
 
         try {
-            await apiFetch('/sanctum/csrf-cookie')
-            await apiFetch('/api/register', {
-                method: 'POST',
-                body: data,
-            })
-            user.value = null
-            await fetchUser()
+            await ensureCsrf()
+            await api('/api/login', { method: 'POST', body: payload })
+            await refreshUser()
         } catch (e: any) {
-            error.value = e?.data?.message || 'Register failed'
-            throw e
+            error.value = e?.data?.message || e?.message || 'Login failed'
         } finally {
-            loading.value = false
+            actionPending.value = false
         }
     }
 
-    async function logout() {
-        await apiFetch('/api/logout', { method: 'POST' })
-        user.value = null
-        navigateTo('/login')
+    const register = async (payload: any) => {
+        if (actionPending.value) return
+
+        actionPending.value = true
+        error.value = null
+
+        try {
+            await ensureCsrf()
+            await api('/api/register', { method: 'POST', body: payload })
+            await refreshUser()
+        } catch (e: any) {
+            error.value = e?.data?.message || e?.message || 'Register failed'
+        } finally {
+            actionPending.value = false
+        }
+    }
+
+    const logout = async () => {
+        if (actionPending.value) return
+
+        actionPending.value = true
+        error.value = null
+
+        try {
+            await ensureCsrf()
+            await api('/api/logout', { method: 'POST' })
+            user.value = null
+            loaded.value = true
+        } catch (e: any) {
+            error.value = e?.data?.message || e?.message || 'Logout failed'
+        } finally {
+            actionPending.value = false
+        }
     }
 
     return {
         user,
-        loading,
+        isAuth,
+        actionPending,
+        userPending,
+        pending,
         error,
-        isAuthenticated,
-        fetchUser,
+        loadUser,
+        refreshUser,
         login,
         register,
         logout,
