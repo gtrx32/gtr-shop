@@ -7,7 +7,6 @@ export const useAuth = () => {
 
     const actionPending = useState<boolean>('auth:actionPending', () => false)
     const userPending = useState<boolean>('auth:userPending', () => false)
-    const pending = computed(() => actionPending.value || userPending.value)
 
     const error = useState<string | null>('auth:error', () => null)
 
@@ -17,18 +16,18 @@ export const useAuth = () => {
         await api('/sanctum/csrf-cookie', { method: 'GET' })
     }
 
-    const fetchUser = async ({ force = false } = {}) => {
+    const fetchUser = async (options: { force?: boolean } = {}) => {
+        const force = options.force ?? false
+
         if (userPending.value) return user.value
         if (!force && loaded.value) return user.value
 
         userPending.value = true
-        error.value = null
 
         try {
             user.value = await api('/api/user', { method: 'GET' })
-        } catch (e: any) {
+        } catch {
             user.value = null
-            error.value = e?.data?.message || e?.message || 'Request failed'
         } finally {
             loaded.value = true
             userPending.value = false
@@ -98,7 +97,6 @@ export const useAuth = () => {
         isAuth,
         actionPending,
         userPending,
-        pending,
         error,
         loadUser,
         refreshUser,

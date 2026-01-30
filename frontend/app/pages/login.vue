@@ -1,49 +1,80 @@
 <template>
-  <div style="max-width:420px;margin:40px auto;font-family:sans-serif;">
-    <h2>Login</h2>
+  <div class="min-h-dvh flex items-center justify-center px-4">
+    <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6">
+      <h1 class="text-xl font-semibold">Вход</h1>
 
-    <label style="display:block;margin:10px 0;">
-      Email
-      <input
-          v-model="email"
-          type="email"
-          autocomplete="email"
-          style="width:100%;padding:8px;"
-      />
-    </label>
+      <form class="mt-6 space-y-4" @submit.prevent="onSubmit">
+        <div class="space-y-1">
+          <label class="text-sm text-zinc-700">Email</label>
+          <input
+              v-model.trim="form.email"
+              type="email"
+              autocomplete="email"
+              required
+              :disabled="actionPending"
+              class="w-full rounded-xl border border-zinc-200 px-3 py-2 outline-none focus:border-zinc-400 disabled:opacity-60"
+          />
+        </div>
 
-    <label style="display:block;margin:10px 0;">
-      Password
-      <input
-          v-model="password"
-          type="password"
-          autocomplete="current-password"
-          style="width:100%;padding:8px;"
-      />
-    </label>
+        <div class="space-y-1">
+          <label class="text-sm text-zinc-700">Пароль</label>
+          <input
+              v-model="form.password"
+              type="password"
+              autocomplete="current-password"
+              required
+              :disabled="actionPending"
+              class="w-full rounded-xl border border-zinc-200 px-3 py-2 outline-none focus:border-zinc-400 disabled:opacity-60"
+          />
+        </div>
 
-    <button @click="onLogin" :disabled="loading" style="padding:10px 14px;">
-      Login
-    </button>
+        <p v-if="error" class="text-sm text-red-600">
+          {{ error }}
+        </p>
 
-    <div v-if="error" style="margin-top:12px;color:#b00020;">
-      {{ error }}
+        <button
+            type="submit"
+            :disabled="actionPending"
+            class="w-full rounded-xl bg-zinc-900 px-4 py-2 text-white disabled:opacity-60"
+        >
+          {{ actionPending ? 'Входим…' : 'Войти' }}
+        </button>
+
+        <div class="pt-2 text-sm text-zinc-700">
+          <NuxtLink
+              to="/register"
+              class="underline underline-offset-4 hover:text-zinc-900"
+          >
+            Регистрация
+          </NuxtLink>
+          <UButton color="primary" variant="solid">Primary</UButton>
+          <UButton color="gray" variant="solid">Gray</UButton>
+          <UButton color="red" variant="solid">Red</UButton>
+          <UButton color="green" variant="solid">Green</UButton>
+          <UButton color="blue" variant="solid">Blue</UButton>
+          <UButton color="amber" variant="solid">Amber</UButton>
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+useHead({ title: 'Вход' })
 
-const email = ref('admin@example.com')
-const password = ref('admin123')
+const route = useRoute()
+const router = useRouter()
+const { login, actionPending, error } = useAuth()
 
-const { login, loading, error } = useAuth()
+const form = reactive({
+  email: '',
+  password: '',
+})
 
-async function onLogin() {
+const onSubmit = async () => {
   await login({
-    email: email.value,
-    password: password.value,
+    email: form.email,
+    password: form.password,
   })
 }
 </script>

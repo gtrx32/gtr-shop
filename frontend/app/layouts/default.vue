@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import Header from "~/components/layout/default/Header.vue";
 import Footer from "~/components/layout/default/Footer.vue";
+
+const { loadUser } = useAuth()
+await loadUser()
 </script>
 
 <template>
