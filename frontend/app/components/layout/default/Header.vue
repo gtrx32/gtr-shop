@@ -17,21 +17,21 @@ async function handleLogout() {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-gray-50 shadow-lg">
+  <header class="sticky top-0 z-50 shadow-md shadow-gtr-soft bg-gtr-pale">
     <div class="flex items-center justify-between px-4 sm:px-8 lg:px-16 py-4 sm:py-5 lg:py-6">
       <nuxt-link
           to="/"
-          class="font-blazma font-bold italic text-2xl sm:text-3xl tracking-widest"
+          class="font-blazma font-bold italic text-2xl sm:text-3xl tracking-widest hover:text-gtr-contrast"
       >
         GTRSHOP
       </nuxt-link>
 
       <div class="hidden md:flex flex-1 justify-center">
         <nav class="flex items-center gap-6 lg:gap-8">
-          <nuxt-link to="/">Главная</nuxt-link>
-          <nuxt-link to="/catalog">Каталог</nuxt-link>
-          <nuxt-link to="/news">Новости</nuxt-link>
-          <nuxt-link to="/contacts">Контакты</nuxt-link>
+          <nuxt-link to="/" class="hover:text-gtr-contrast">Главная</nuxt-link>
+          <nuxt-link to="/catalog" class="hover:text-gtr-contrast">Каталог</nuxt-link>
+          <nuxt-link to="/news" class="hover:text-gtr-contrast">Новости</nuxt-link>
+          <nuxt-link to="/contacts" class="hover:text-gtr-contrast">Контакты</nuxt-link>
         </nav>
       </div>
 
@@ -69,13 +69,13 @@ async function handleLogout() {
       </UiButton>
     </div>
 
-    <div v-if="isMobileMenuOpen" class="md:hidden border-t border-zinc-200 bg-gray-50">
+    <div v-if="isMobileMenuOpen" class="md:hidden border-t border-gtr-soft">
       <div class="px-4 sm:px-8 py-4 space-y-3">
         <nav class="flex flex-col gap-1">
-          <nuxt-link @click="closeMobile" to="/" class="py-2">Главная</nuxt-link>
-          <nuxt-link @click="closeMobile" to="/catalog" class="py-2">Каталог</nuxt-link>
-          <nuxt-link @click="closeMobile" to="/news" class="py-2">Новости</nuxt-link>
-          <nuxt-link @click="closeMobile" to="/contacts" class="py-2">Контакты</nuxt-link>
+          <nuxt-link @click="closeMobile" to="/" class="py-2 hover:text-gtr-contrast">Главная</nuxt-link>
+          <nuxt-link @click="closeMobile" to="/catalog" class="py-2 hover:text-gtr-contrast">Каталог</nuxt-link>
+          <nuxt-link @click="closeMobile" to="/news" class="py-2 hover:text-gtr-contrast">Новости</nuxt-link>
+          <nuxt-link @click="closeMobile" to="/contacts" class="py-2 hover:text-gtr-contrast">Контакты</nuxt-link>
         </nav>
 
         <template v-if="user">
@@ -88,7 +88,7 @@ async function handleLogout() {
             <Icon name="mdi:user" class="text-3xl" />
             <div>
               <div class="font-medium leading-tight">{{ user.name }}</div>
-              <div class="text-sm text-zinc-500">{{ user.email }}</div>
+              <div class="text-sm">{{ user.email }}</div>
             </div>
           </UiButton>
 

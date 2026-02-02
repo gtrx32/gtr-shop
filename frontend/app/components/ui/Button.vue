@@ -13,10 +13,9 @@ const component = computed(() =>
 <template>
   <component
       :is="component"
-      class="rounded-lg border border-zinc-200 bg-white shadow-sm leading-none"
+      class="rounded-lg border border-gtr-soft shadow-sm shadow-gtr-soft leading-none text-gtr-base hover:bg-gtr-hover cursor-pointer"
       v-bind="$attrs"
   >
     <slot />
   </component>
 </template>
-
