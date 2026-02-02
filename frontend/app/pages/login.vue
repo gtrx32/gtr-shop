@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-dvh flex items-center justify-center px-4">
+  <div class="flex items-center justify-center px-4">
     <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6">
       <h1 class="text-xl font-semibold">Вход</h1>
 
@@ -39,21 +39,6 @@
         >
           {{ actionPending ? 'Входим…' : 'Войти' }}
         </button>
-
-        <div class="pt-2 text-sm text-zinc-700">
-          <NuxtLink
-              to="/register"
-              class="underline underline-offset-4 hover:text-zinc-900"
-          >
-            Регистрация
-          </NuxtLink>
-          <UButton color="primary" variant="solid">Primary</UButton>
-          <UButton color="gray" variant="solid">Gray</UButton>
-          <UButton color="red" variant="solid">Red</UButton>
-          <UButton color="green" variant="solid">Green</UButton>
-          <UButton color="blue" variant="solid">Blue</UButton>
-          <UButton color="amber" variant="solid">Amber</UButton>
-        </div>
       </form>
     </div>
   </div>
