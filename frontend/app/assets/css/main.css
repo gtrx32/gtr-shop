@@ -41,3 +41,14 @@ html {
     --ui-warning: var(--color-gtr-warning);
     --ui-error: var(--color-gtr-error);
 }
+
+.m-menu-enter-active,
+.m-menu-leave-active {
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.m-menu-enter-from,
+.m-menu-leave-to {
+    opacity: 0;
+    transform: translateY(-6px);
+}
