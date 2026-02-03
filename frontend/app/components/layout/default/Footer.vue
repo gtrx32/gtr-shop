@@ -18,15 +18,15 @@
             Магазин по продаже ничего.
           </p>
           <div class="flex items-center justify-center md:justify-start gap-3">
-            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gtr-hover">
-              <Icon name="mdi:telegram" class="text-2xl text-inherit"/>
-            </a>
-            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gtr-hover">
-              <Icon name="mdi:vk" class="text-2xl text-inherit"/>
-            </a>
-            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gtr-hover">
-              <Icon name="mdi:instagram" class="text-2xl text-inherit"/>
-            </a>
+            <u-button color="primary" square variant="ghost" size="xl" to="#">
+              <icon name="mdi:telegram" class="text-2xl text-inherit"/>
+            </u-button>
+            <u-button color="primary" square variant="ghost" size="xl" to="#">
+              <icon name="mdi:vk" class="text-2xl text-inherit"/>
+            </u-button>
+            <u-button color="primary" square variant="ghost" size="xl" to="#">
+              <icon name="mdi:instagram" class="text-2xl text-inherit"/>
+            </u-button>
           </div>
         </div>
 
@@ -34,20 +34,20 @@
           <div class="space-y-3">
             <div class="font-medium text-gtr-base">Навигация</div>
             <nav class="flex flex-col items-center md:items-start gap-3 text-sm">
-              <nuxt-link to="/catalog" class="hover:text-gtr-contrast">Каталог</nuxt-link>
-              <nuxt-link to="/news" class="hover:text-gtr-contrast">Новости</nuxt-link>
-              <nuxt-link to="/contacts" class="hover:text-gtr-contrast">Контакты</nuxt-link>
-              <nuxt-link to="/cart" class="hover:text-gtr-contrast">Корзина</nuxt-link>
+              <u-button to="/catalog" color="primary" variant="link" size="md">Каталог</u-button>
+              <u-button to="/news" color="primary" variant="link" size="md">Новости</u-button>
+              <u-button to="/contacts" color="primary" variant="link" size="md">Контакты</u-button>
+              <u-button to="/cart" color="primary" variant="link" size="md">Корзина</u-button>
             </nav>
           </div>
 
           <div class="space-y-3">
             <div class="font-medium text-gtr-base">Покупателям</div>
             <nav class="flex flex-col items-center md:items-start gap-3 text-sm">
-              <nuxt-link to="/conditions" class="hover:text-gtr-contrast">Доставка и оплата</nuxt-link>
-              <nuxt-link to="/returns" class="hover:text-gtr-contrast">Возврат и обмен</nuxt-link>
-              <nuxt-link to="/faq" class="hover:text-gtr-contrast">FAQ</nuxt-link>
-              <nuxt-link to="/about" class="hover:text-gtr-contrast">Отзывы</nuxt-link>
+              <u-button to="/conditions" color="primary" variant="link" size="md">Доставка и оплата</u-button>
+              <u-button to="/returns" color="primary" variant="link" size="md">Возврат и обмен</u-button>
+              <u-button to="/faq" color="primary" variant="link" size="md">FAQ</u-button>
+              <u-button to="/about" color="primary" variant="link" size="md">Отзывы</u-button>
             </nav>
           </div>
         </div>
@@ -55,23 +55,20 @@
         <div class="space-y-3">
           <div class="font-medium text-gtr-base">Контакты</div>
           <div class="flex flex-col items-center md:items-start gap-3 text-sm">
-            <a href="tel:+79990000000"
-               class="flex items-center gap-2 justify-center md:justify-start hover:text-gtr-contrast">
-              <Icon name="mdi:phone-outline" class="text-xl"/>
+            <u-button to="tel:+79990000000" color="primary" variant="link" size="md" class="gap-2">
+              <icon name="mdi:phone-outline" class="text-xl"/>
               <span>+7 (999) 000-00-00</span>
-            </a>
-            <a href="mailto:info@gtrshop.ru"
-               class="flex items-center gap-2 justify-center md:justify-start hover:text-gtr-contrast">
-              <Icon name="mdi:email-outline" class="text-xl"/>
+            </u-button>
+            <u-button to="mailto:info@gtrshop.ru" color="primary" variant="link" size="md" class="gap-2">
+              <icon name="mdi:email-outline" class="text-xl"/>
               <span>info@gtrshop.ru</span>
-            </a>
-            <a href="#"
-               class="flex items-center gap-2 justify-center md:justify-start hover:text-gtr-contrast">
-              <Icon name="mdi:map-marker-outline" class="text-xl"/>
+            </u-button>
+            <u-button to="#" color="primary" variant="link" size="md" class="gap-2">
+              <icon name="mdi:map-marker-outline" class="text-xl"/>
               <span>
                 Улица Есенина, дом Каруселина
               </span>
-            </a>
+            </u-button>
           </div>
         </div>
       </div>
@@ -87,15 +84,15 @@
           © {{ new Date().getFullYear() }} GTRSHOP. Все права защищены.
         </div>
         <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
-          <nuxt-link to="/privacy" class="hover:text-gtr-contrast">
+          <u-button to="/privacy" color="primary" variant="link" size="md">
             Политика конфиденциальности
-          </nuxt-link>
-          <nuxt-link to="/terms" class="hover:text-gtr-contrast">
+          </u-button>
+          <u-button to="/terms" color="primary" variant="link" size="md">
             Пользовательское соглашение
-          </nuxt-link>
-          <nuxt-link to="/offer" class="hover:text-gtr-contrast">
+          </u-button>
+          <u-button to="/offer" color="primary" variant="link" size="md">
             Публичная оферта
-          </nuxt-link>
+          </u-button>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref} from 'vue'
 
-const { user, loadUser, logout } = useAuth()
+const {user, loadUser, logout} = useAuth()
 await loadUser()
 
 const isMobileMenuOpen = ref(false)
@@ -28,109 +28,109 @@ async function handleLogout() {
 
       <div class="hidden md:flex flex-1 justify-center">
         <nav class="flex items-center gap-6 lg:gap-8">
-          <nuxt-link to="/" class="hover:text-gtr-contrast">Главная</nuxt-link>
-          <nuxt-link to="/catalog" class="hover:text-gtr-contrast">Каталог</nuxt-link>
-          <nuxt-link to="/news" class="hover:text-gtr-contrast">Новости</nuxt-link>
-          <nuxt-link to="/contacts" class="hover:text-gtr-contrast">Контакты</nuxt-link>
+          <u-button to="/" color="primary" variant="link" size="xl">Главная</u-button>
+          <u-button to="/catalog" color="primary" variant="link" size="xl">Каталог</u-button>
+          <u-button to="/news" color="primary" variant="link" size="xl">Новости</u-button>
+          <u-button to="/contacts" color="primary" variant="link" size="xl">Контакты</u-button>
         </nav>
       </div>
 
-      <div class="hidden md:flex items-center gap-3">
+      <div class="hidden md:flex items-stretch gap-3">
         <template v-if="user">
-          <UiButton tag="nuxt-link" to="/cart" class="inline-flex items-center justify-center p-2">
-            <Icon name="mdi:cart-outline" class="text-xl" />
-          </UiButton>
-          <UiButton tag="nuxt-link" to="/profile" class="inline-flex items-center justify-center gap-1 p-2">
+          <u-button to="/cart" color="primary" variant="ghost" size="xl">
+            <icon name="mdi:cart-outline" class="text-xl"/>
+          </u-button>
+          <u-button to="/profile" color="primary" variant="ghost" size="xl">
             <span>{{ user.name }}</span>
-            <Icon name="mdi:user" class="text-xl" />
-          </UiButton>
-          <UiButton tag="button" @click="handleLogout" class="inline-flex items-center justify-center p-2">
-            <Icon name="mdi:exit-to-app" class="text-xl" />
-          </UiButton>
+            <icon name="mdi:user" class="text-xl"/>
+          </u-button>
+          <u-button @click="handleLogout" color="primary" variant="ghost" size="xl">
+            <icon name="mdi:exit-to-app" class="text-xl"/>
+          </u-button>
         </template>
 
         <template v-else>
-          <UiButton tag="nuxt-link" to="/login" class="inline-flex px-4 py-2">
+          <u-button to="/login" color="primary" variant="ghost" size="xl">
             Вход
-          </UiButton>
-          <UiButton tag="nuxt-link" to="/register" class="inline-flex px-4 py-2">
+          </u-button>
+          <u-button to="/register" color="primary" variant="ghost" size="xl">
             Регистрация
-          </UiButton>
+          </u-button>
         </template>
       </div>
 
-      <UiButton
-          tag="button"
+      <u-button
+          color="primary" variant="ghost" size="xl"
           @click="isMobileMenuOpen = !isMobileMenuOpen"
-          class="inline-flex items-center gap-2 px-4 py-2 md:hidden"
+          class="md:hidden"
       >
-        <Icon :name="isMobileMenuOpen ? 'mdi:close' : 'mdi:menu'" class="text-xl" />
+        <icon :name="isMobileMenuOpen ? 'mdi:close' : 'mdi:menu'" class="text-xl"/>
         <span>Меню</span>
-      </UiButton>
+      </u-button>
     </div>
 
     <div v-if="isMobileMenuOpen" class="md:hidden border-t border-gtr-soft">
       <div class="px-4 sm:px-8 py-4 space-y-3">
         <nav class="flex flex-col gap-1">
-          <nuxt-link @click="closeMobile" to="/" class="py-2 hover:text-gtr-contrast">Главная</nuxt-link>
-          <nuxt-link @click="closeMobile" to="/catalog" class="py-2 hover:text-gtr-contrast">Каталог</nuxt-link>
-          <nuxt-link @click="closeMobile" to="/news" class="py-2 hover:text-gtr-contrast">Новости</nuxt-link>
-          <nuxt-link @click="closeMobile" to="/contacts" class="py-2 hover:text-gtr-contrast">Контакты</nuxt-link>
+          <u-button @click="closeMobile" to="/" color="primary" variant="link" size="xl">Главная</u-button>
+          <u-button @click="closeMobile" to="/catalog" color="primary" variant="link" size="xl">Каталог</u-button>
+          <u-button @click="closeMobile" to="/news" color="primary" variant="link" size="xl">Новости</u-button>
+          <u-button @click="closeMobile" to="/contacts" color="primary" variant="link" size="xl">Контакты</u-button>
         </nav>
 
         <template v-if="user">
-          <UiButton
-              tag="nuxt-link"
+          <u-button
               to="/profile"
               @click="closeMobile"
-              class="flex items-center gap-3 px-4 py-4 justify-start"
+              color="primary" variant="ghost" size="xl"
+              class="flex justify-start gap-3 px-4 py-4"
           >
-            <Icon name="mdi:user" class="text-3xl" />
+            <icon name="mdi:user" class="text-4xl"/>
             <div>
               <div class="font-medium leading-tight">{{ user.name }}</div>
               <div class="text-sm">{{ user.email }}</div>
             </div>
-          </UiButton>
+          </u-button>
 
           <div class="grid grid-cols-2 gap-3">
-            <UiButton
-                tag="nuxt-link"
+            <u-button
                 to="/cart"
                 @click="closeMobile"
-                class="flex items-center justify-center gap-2 px-4 py-3"
+                color="primary" variant="ghost" size="xl"
+                class="flex px-4 py-4"
             >
-              <Icon name="mdi:cart-outline" class="text-xl" />
+              <icon name="mdi:cart-outline" class="text-xl"/>
               <span>Корзина</span>
-            </UiButton>
-            <UiButton
-                tag="button"
+            </u-button>
+            <u-button
                 @click="handleLogout"
-                class="flex items-center justify-center gap-2 px-4 py-3"
+                color="primary" variant="ghost" size="xl"
+                class="flex px-4 py-4"
             >
-              <Icon name="mdi:exit-to-app" class="text-xl" />
+              <icon name="mdi:exit-to-app" class="text-xl"/>
               <span>Выйти</span>
-            </UiButton>
+            </u-button>
           </div>
         </template>
 
         <template v-else>
           <div class="grid grid-cols-2 gap-3">
-            <UiButton
-                tag="nuxt-link"
+            <u-button
                 to="/login"
                 @click="closeMobile"
-                class="flex items-center justify-center px-4 py-3"
+                color="primary" variant="ghost" size="xl"
+                class="flex px-4 py-4"
             >
               Вход
-            </UiButton>
-            <UiButton
-                tag="nuxt-link"
+            </u-button>
+            <u-button
                 to="/register"
                 @click="closeMobile"
-                class="flex items-center justify-center px-4 py-3"
+                color="primary" variant="ghost" size="xl"
+                class="flex px-4 py-4"
             >
               Регистрация
-            </UiButton>
+            </u-button>
           </div>
         </template>
       </div>
