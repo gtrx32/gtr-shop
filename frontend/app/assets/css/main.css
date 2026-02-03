@@ -44,11 +44,11 @@ html {
 
 .m-menu-enter-active,
 .m-menu-leave-active {
-    transition: opacity 160ms ease, transform 160ms ease;
+    transition: opacity 300ms ease, transform 300ms ease;
 }
 
 .m-menu-enter-from,
 .m-menu-leave-to {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(50px);
 }
