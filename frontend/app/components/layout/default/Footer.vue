@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const {theme, toggle: themeToggle} = useTheme()
 </script>
 
 <template>
@@ -75,15 +75,16 @@
     </div>
 
     <div class="border-t border-gtr-soft">
-      <div class="px-4 sm:px-8 lg:px-16 py-4 sm:py-5 lg:py-6 text-sm
-               flex flex-col-reverse gap-3
-               items-center text-center
-               md:flex-row md:justify-between md:items-center md:text-left"
+      <div
+          class="px-4 sm:px-8 lg:px-16 py-4 sm:py-5 lg:py-6 text-sm
+           flex flex-col gap-4 md:gap-8 items-center text-center
+           md:flex-row md:items-center md:text-left"
       >
         <div>
           © {{ new Date().getFullYear() }} GTRSHOP. Все права защищены.
         </div>
-        <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+
+        <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 md:ml-auto md:justify-end">
           <u-button to="/privacy" color="primary" variant="link" size="md">
             Политика конфиденциальности
           </u-button>
@@ -92,6 +93,26 @@
           </u-button>
           <u-button to="/offer" color="primary" variant="link" size="md">
             Публичная оферта
+          </u-button>
+        </div>
+
+        <div class="md:ml-2">
+          <u-button
+              color="primary"
+              variant="ghost"
+              size="xl"
+              square
+              @click="themeToggle"
+              aria-label="Переключить тему"
+          >
+            <icon
+                :key="theme"
+                mode="svg"
+                class="text-xl"
+                :name="theme === 'dark'
+            ? 'line-md:moon-to-sunny-outline-transition'
+            : 'line-md:sunny-outline-to-moon-transition'"
+            />
           </u-button>
         </div>
       </div>

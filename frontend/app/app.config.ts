@@ -17,6 +17,18 @@ export default defineAppConfig({
                     class: 'text-md py-0'
                 }
             ]
+        },
+        input: {
+            slots: {
+                base: 'border border-muted !focus-visible:border-primary !focus-visible:ring-0',
+            },
+        },
+        checkbox: {
+            slots: {
+                root: 'w-fit cursor-pointer',
+                base: 'cursor-pointer',
+                label: 'cursor-pointer',
+            }
         }
     }
 })

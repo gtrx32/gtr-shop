@@ -1,65 +1,89 @@
-<template>
-  <div class="flex items-center justify-center px-4">
-    <div class="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6">
-      <h1 class="text-xl font-semibold">Вход</h1>
-
-      <form class="mt-6 space-y-4" @submit.prevent="onSubmit">
-        <div class="space-y-1">
-          <label class="text-sm text-zinc-700">Email</label>
-          <input
-              v-model.trim="form.email"
-              type="email"
-              autocomplete="email"
-              required
-              :disabled="actionPending"
-              class="w-full rounded-xl border border-zinc-200 px-3 py-2 outline-none focus:border-zinc-400 disabled:opacity-60"
-          />
-        </div>
-
-        <div class="space-y-1">
-          <label class="text-sm text-zinc-700">Пароль</label>
-          <input
-              v-model="form.password"
-              type="password"
-              autocomplete="current-password"
-              required
-              :disabled="actionPending"
-              class="w-full rounded-xl border border-zinc-200 px-3 py-2 outline-none focus:border-zinc-400 disabled:opacity-60"
-          />
-        </div>
-
-        <p v-if="error" class="text-sm text-red-600">
-          {{ error }}
-        </p>
-
-        <button
-            type="submit"
-            :disabled="actionPending"
-            class="w-full rounded-xl bg-zinc-900 px-4 py-2 text-white disabled:opacity-60"
-        >
-          {{ actionPending ? 'Входим…' : 'Войти' }}
-        </button>
-      </form>
-    </div>
-  </div>
-</template>
-
+<!-- pages/login.vue -->
 <script setup lang="ts">
-useHead({ title: 'Вход' })
-
-const route = useRoute()
-const router = useRouter()
-const { login, actionPending, error } = useAuth()
-
 const form = reactive({
   email: '',
   password: '',
+  remember: false,
 })
 
-const onSubmit = async () => {
+const {login, actionPending, error} = useAuth()
+
+async function onSubmit() {
   await login({
     email: form.email,
     password: form.password,
-  })
+    remember: form.remember,
+  } as any)
 }
 </script>
+
+<template>
+  <div class="flex items-center justify-center p-4">
+    <UCard class="w-full max-w-sm">
+      <template #header>
+        <div class="text-lg font-semibold">Вход</div>
+      </template>
+
+      <UForm :state="form" @submit.prevent="onSubmit" class="mt-2">
+        <!-- Визуальный стек формы -->
+        <div class="space-y-5">
+          <!-- Поля (можно сделать плотнее отдельной обёрткой) -->
+          <div class="space-y-4">
+            <UInput
+                v-model="form.email"
+                type="email"
+                autocomplete="email"
+                placeholder=""
+                :ui="{ base: 'peer' }"
+                class="w-full"
+            >
+              <label
+                  class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal"
+              >
+                <span class="inline-flex bg-default px-1">Email address</span>
+              </label>
+            </UInput>
+
+            <UInput
+                v-model="form.password"
+                type="password"
+                autocomplete="current-password"
+                placeholder=""
+                :ui="{ base: 'peer' }"
+                class="w-full"
+            >
+              <label
+                  class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal"
+              >
+                <span class="inline-flex bg-default px-1">Password</span>
+              </label>
+            </UInput>
+          </div>
+
+          <UCheckbox v-model="form.remember" label="Запомнить меня" />
+
+          <UAlert
+              v-if="error"
+              color="error"
+              variant="soft"
+              title="Ошибка входа"
+              :description="typeof error === 'string' ? error : (error?.message ?? 'Не удалось выполнить вход')"
+          />
+
+          <!-- Кнопка по центру -->
+          <div class="flex justify-center pt-2">
+            <UButton
+                type="submit"
+                class="px-5"
+                :loading="actionPending"
+                :disabled="actionPending || !form.email || !form.password"
+            >
+              Войти
+            </UButton>
+          </div>
+        </div>
+      </UForm>
+    </UCard>
+  </div>
+</template>
+

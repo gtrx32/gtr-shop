@@ -3,6 +3,11 @@
 @import "./theme.css";
 @import "./ui.css";
 
+@theme {
+    --font-blazma: 'Blazma', system-ui, sans-serif;
+    --font-ceraPro: 'CeraPro', system-ui, sans-serif;
+}
+
 html {
     font-family: 'CeraPro', sans-serif;
     font-size: 16px;
