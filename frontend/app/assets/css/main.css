@@ -1,45 +1,11 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@import "./theme.css";
+@import "./ui.css";
 
 html {
     font-family: 'CeraPro', sans-serif;
     font-size: 16px;
-}
-
-@theme {
-    --color-gtr-contrast: rgb(0, 0, 0);
-    --color-gtr-base: rgb(25, 25, 25);
-    --color-gtr-muted: rgb(60, 60, 60);
-    --color-gtr-soft: rgb(200, 200, 200);
-    --color-gtr-hover: rgb(225, 225, 225);
-    --color-gtr-pale: rgb(245, 245, 245);
-    --color-gtr-highlight: rgb(110, 135, 255);
-    --color-gtr-accent: rgb(135, 150, 220);
-    --color-gtr-warning: rgb(255, 170, 100);
-    --color-gtr-error: rgb(255, 120, 120);
-}
-
-.dark {
-    --color-gtr-contrast: rgb(255, 255, 255);
-    --color-gtr-base: rgb(245, 245, 245);
-    --color-gtr-muted: rgb(200, 200, 200);
-    --color-gtr-soft: rgb(60, 60, 60);
-    --color-gtr-hover: rgb(45, 45, 45);
-    --color-gtr-pale: rgb(25, 25, 25);
-    --color-gtr-highlight: rgb(90, 115, 255);
-    --color-gtr-accent: rgb(125, 140, 210);
-    --color-gtr-warning: rgb(255, 140, 90);
-    --color-gtr-error: rgb(210, 90, 90);
-}
-
-@theme {
-    --font-blazma: 'Blazma', system-ui, sans-serif;
-    --font-ceraPro: 'CeraPro', system-ui, sans-serif;
-
-    --ui-primary: var(--color-gtr-contrast);
-    --ui-success: var(--color-gtr-highlight);
-    --ui-warning: var(--color-gtr-warning);
-    --ui-error: var(--color-gtr-error);
 }
 
 .m-menu-enter-active,

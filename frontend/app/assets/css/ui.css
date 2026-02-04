@@ -1,0 +1,25 @@
+@layer base {
+    html {
+        --ui-text-dimmed: var(--color-gtr-dimmed);
+        --ui-text-muted: var(--color-gtr-muted);
+        --ui-text-toned: var(--color-gtr-toned);
+        --ui-text: var(--color-gtr-base);
+        --ui-text-highlighted: var(--color-gtr-contrast);
+        --ui-text-inverted: var(--color-gtr-pale);
+        --ui-bg: var(--color-gtr-pale);
+        --ui-bg-muted: var(--color-gtr-soft);
+        --ui-bg-elevated: var(--color-gtr-pale);
+        --ui-bg-accented: var(--color-gtr-soft);
+        --ui-bg-inverted: var(--color-gtr-contrast);
+        --ui-border: var(--color-gtr-soft);
+        --ui-border-muted: var(--color-gtr-soft);
+        --ui-border-accented: var(--color-gtr-soft);
+        --ui-border-inverted: var(--color-gtr-contrast);
+        --ui-primary: var(--color-gtr-contrast);
+        --ui-secondary: var(--color-gtr-accent);
+        --ui-info: var(--color-gtr-accent);
+        --ui-success: var(--color-gtr-highlight);
+        --ui-warning: var(--color-gtr-warning);
+        --ui-error: var(--color-gtr-error);
+    }
+}
