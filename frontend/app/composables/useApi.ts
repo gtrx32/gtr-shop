@@ -46,6 +46,21 @@ export const useApi = () => {
             }
 
             options.headers = headers
-        }
+        },
+        onRequestError() {
+            const err: ApiError = { status: 0, code: 'NETWORK_ERROR' }
+            throw err
+        },
+        onResponseError({ response }) {
+            const data: any = response._data ?? {}
+
+            const err: ApiError = {
+                status: response.status,
+                code: data.code,
+                errors: data.errors,
+            }
+
+            throw err
+        },
     })
 }

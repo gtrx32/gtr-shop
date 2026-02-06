@@ -19,3 +19,10 @@ export type ApiPaginationMeta = {
     next_page_url: string | null
     prev_page_url: string | null
 }
+
+export type ApiError = {
+    status: number
+    code?: string
+    message?: string
+    errors?: Record<string, string[]>
+}

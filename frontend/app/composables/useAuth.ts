@@ -1,3 +1,5 @@
+import type {ApiError} from "~/types/api";
+
 export const useAuth = () => {
     const api = useApi()
 
@@ -50,8 +52,16 @@ export const useAuth = () => {
             await ensureCsrf()
             await api('/api/login', { method: 'POST', body: payload })
             await refreshUser()
-        } catch (e: any) {
-            error.value = e?.data?.message || e?.message || 'Login failed'
+        } catch (e: ApiError) {
+            const err = e
+
+            if (err.status === 401) {
+                error.value = 'Неверный email или пароль.'
+            } else if (err.status === 422) {
+                error.value = 'Некорректно заполнена форма.'
+            } else {
+                error.value = 'Не удалось выполнить вход.'
+            }
         } finally {
             actionPending.value = false
         }
@@ -67,8 +77,14 @@ export const useAuth = () => {
             await ensureCsrf()
             await api('/api/register', { method: 'POST', body: payload })
             await refreshUser()
-        } catch (e: any) {
-            error.value = e?.data?.message || e?.message || 'Register failed'
+        } catch (e: ApiError) {
+            const err = e
+
+            if (err.status === 422) {
+                error.value = 'Некорректно заполнена форма.'
+            } else {
+                error.value = 'Не удалось выполнить регистрацию.'
+            }
         } finally {
             actionPending.value = false
         }
@@ -85,8 +101,8 @@ export const useAuth = () => {
             await api('/api/logout', { method: 'POST' })
             user.value = null
             loaded.value = true
-        } catch (e: any) {
-            error.value = e?.data?.message || e?.message || 'Logout failed'
+        } catch (e: ApiError) {
+            error.value = 'Не удалось выйти из системы.'
         } finally {
             actionPending.value = false
         }
