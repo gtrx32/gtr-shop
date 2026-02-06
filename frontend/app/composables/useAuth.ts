@@ -85,6 +85,12 @@ export const useAuth = () => {
             await ensureCsrf()
             await api('/api/register', { method: 'POST', body: payload })
             await refreshUser()
+            toast.add({
+                title: 'Регистрация выполнена успешно',
+                description: `Добро пожаловать, ${user.value.name}`,
+                color: 'success',
+            })
+            await navigateTo('/')
         } catch (e: ApiError) {
             const err = e
 

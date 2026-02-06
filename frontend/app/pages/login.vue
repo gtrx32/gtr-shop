@@ -15,7 +15,7 @@ const formRef = ref()
 
 const schema = z.object({
   email: z.string().trim().min(1, 'Введите email').email('Некорректный email'),
-  password: z.string().trim().min(1, 'Введите пароль').min(6, 'Минимум 6 символов'),
+  password: z.string().trim().min(1, 'Введите пароль'),
   remember: z.boolean().optional(),
 })
 
