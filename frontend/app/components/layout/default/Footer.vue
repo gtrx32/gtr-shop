@@ -3,7 +3,7 @@ const {theme, toggle: themeToggle} = useTheme()
 </script>
 
 <template>
-  <footer class="shadow-[0_-4px_6px] shadow-gtr-soft text-gtr-muted">
+  <footer class="shadow-[0_-4px_6px] shadow-gtr-soft ">
     <div class="px-4 sm:px-8 lg:px-16 py-8 sm:py-10 lg:py-12">
       <div
           class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 text-center md:text-left items-center md:items-start">
@@ -14,7 +14,7 @@ const {theme, toggle: themeToggle} = useTheme()
           >
             GTRSHOP
           </nuxt-link>
-          <p class="leading-relaxed max-w-sm mx-auto md:mx-0">
+          <p class="leading-relaxed max-w-sm mx-auto md:mx-0 text-gtr-muted">
             Магазин по продаже ничего.
           </p>
           <div class="flex items-center justify-center md:justify-start gap-3">
@@ -78,7 +78,7 @@ const {theme, toggle: themeToggle} = useTheme()
       <div
           class="px-4 sm:px-8 lg:px-16 py-4 sm:py-5 lg:py-6 text-sm
            flex flex-col gap-4 md:gap-8 items-center text-center
-           md:flex-row md:items-center md:text-left"
+           md:flex-row md:items-center md:text-left text-gtr-muted"
       >
         <div>
           © {{ new Date().getFullYear() }} GTRSHOP. Все права защищены.

@@ -18,5 +18,11 @@ export default defineAppConfig({
                 }
             ]
         },
+        toast: {
+            slots: {
+                title: 'text-lg',
+                description: 'text-base',
+            },
+        },
     }
 })

@@ -12,6 +12,8 @@ export const useAuth = () => {
 
     const error = useState<string | null>('auth:error', () => null)
 
+    const toast = useToast()
+
     const ensureCsrf = async () => {
         const token = useCookie('XSRF-TOKEN').value
         if (token) return
@@ -52,6 +54,12 @@ export const useAuth = () => {
             await ensureCsrf()
             await api('/api/login', { method: 'POST', body: payload })
             await refreshUser()
+            toast.add({
+                title: 'Вход выполнен успешно',
+                description: `Добро пожаловать, ${user.value.name}`,
+                color: 'success',
+            })
+            await navigateTo('/')
         } catch (e: ApiError) {
             const err = e
 

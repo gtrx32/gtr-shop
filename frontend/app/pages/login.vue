@@ -25,9 +25,6 @@ async function onSubmit() {
     password: form.password.trim(),
     remember: form.remember,
   })
-  if (!error.value) {
-    await navigateTo('/')
-  }
 }
 </script>
 
