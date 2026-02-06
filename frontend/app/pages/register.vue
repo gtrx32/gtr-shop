@@ -11,7 +11,6 @@ const form = reactive({
 })
 
 const showPassword = ref(false)
-const showPasswordConfirm = ref(false)
 
 const formRef = ref()
 
@@ -85,12 +84,12 @@ async function onSubmit() {
         <UInput
             v-model="form.password_confirmation"
             class="w-full"
-            :type="showPasswordConfirm ? 'text' : 'password'"
+            :type="showPassword ? 'text' : 'password'"
             :ui="{ base: 'py-2 focus-visible:ring-0.5 transition-[box-shadow] duration-200' }"
         >
           <template #trailing>
-            <UButton variant="link" size="xl" @click="showPasswordConfirm = !showPasswordConfirm">
-              <icon :name="showPasswordConfirm ? 'mdi:eye-off-outline' : 'mdi:eye-outline'" class="text-xl" />
+            <UButton variant="link" size="xl" @click="showPassword = !showPassword">
+              <icon :name="showPassword ? 'mdi:eye-off-outline' : 'mdi:eye-outline'" class="text-xl" />
             </UButton>
           </template>
         </UInput>
