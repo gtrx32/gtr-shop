@@ -28,9 +28,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->json([
-            'user' => new UserResource($user),
-        ], 201);
+        return response()->json(new UserResource($user), 201);
     }
 
     public function login(LoginRequest $request): JsonResponse
@@ -50,9 +48,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->json([
-            'user' => new UserResource($request->user()),
-        ], 200);
+        return response()->json(new UserResource($request->user()));
     }
 
     public function logout(Request $request): JsonResponse
@@ -65,6 +61,6 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Logged out successfully'
-        ], 200);
+        ]);
     }
 }

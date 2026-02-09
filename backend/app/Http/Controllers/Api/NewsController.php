@@ -28,7 +28,7 @@ class NewsController extends Controller
                 'next_page_url' => $news->nextPageUrl(),
                 'prev_page_url' => $news->previousPageUrl(),
             ],
-        ], 200);
+        ]);
     }
 
     public function show(News $news)
@@ -37,6 +37,6 @@ class NewsController extends Controller
             return response()->json(['message' => 'This news item is not available yet'], 403);
         }
 
-        return response()->json(new NewsResource($news), 200);
+        return response()->json(new NewsResource($news));
     }
 }

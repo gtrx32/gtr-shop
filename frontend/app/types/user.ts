@@ -12,3 +12,16 @@ export type User = {
     cart?: Cart
     orders?: Order[]
 }
+
+type LoginPayload = {
+    email: string
+    password: string
+    remember?: boolean
+}
+
+type RegisterPayload = {
+    name: string
+    email: string
+    password: string
+    password_confirmation: string
+}

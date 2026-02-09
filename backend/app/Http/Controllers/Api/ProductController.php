@@ -56,15 +56,15 @@ class ProductController extends Controller
                 'next_page_url' => $products->nextPageUrl(),
                 'prev_page_url' => $products->previousPageUrl(),
             ]
-        ], 200);
+        ]);
     }
 
     public function show(Product $product)
     {
         $product->load(['reviews.user'])
-        ->loadCount('reviews')
-        ->loadAvg(['reviews as rating'], 'rating');
+            ->loadCount('reviews')
+            ->loadAvg(['reviews as rating'], 'rating');
 
-        return response()->json(new ProductResource($product), 200);
+        return response()->json(new ProductResource($product));
     }
 }

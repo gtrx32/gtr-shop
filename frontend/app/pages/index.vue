@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import type { Banner } from '~/types/banner'
-import type { News } from "~/types/news";
-import type { ApiPaginatedResponse } from "~/types/api";
+const api = useApi()
 
-const {apiFetch} = useApi()
+const { data: banners } = await useAsyncData('banners', () =>
+    api<Banner[]>('/api/banners')
+)
 
-const banners = await apiFetch<Banner[]>('/api/banners')
-const { data: news } = await apiFetch<ApiPaginatedResponse<News>>('/api/news')
+const { data: news } = await useAsyncData('news', () =>
+    api<PaginatedResponse<News>>('/api/news')
+)
 </script>
 
 <template>
   <div class="space-y-8 sm:space-y-12">
-    <UiBannerSlider :banners="banners"/>
-    <UiNewsSlider :news="news"/>
+    <UiBannerSlider :banners="banners ?? []"/>
+    <UiNewsSlider :news="news?.data ?? []"/>
   </div>
 </template>

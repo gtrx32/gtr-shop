@@ -1,17 +1,9 @@
-export type ApiListResponse<T> = {
+export type PaginatedResponse<T> = {
     data: T[]
+    meta: PaginationMeta
 }
 
-export type ApiItemResponse<T> = {
-    data: T
-}
-
-export type ApiPaginatedResponse<T> = {
-    data: T[]
-    meta: ApiPaginationMeta
-}
-
-export type ApiPaginationMeta = {
+export type PaginationMeta = {
     current_page: number
     last_page: number
     per_page: number
@@ -20,7 +12,11 @@ export type ApiPaginationMeta = {
     prev_page_url: string | null
 }
 
-export type ApiError = {
+export type MessageResponse = {
+    message: string
+}
+
+export type ErrorResponse = {
     status: number
     code?: string
     message?: string

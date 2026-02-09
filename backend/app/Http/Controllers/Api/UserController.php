@@ -14,6 +14,7 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = $request->user()->load('cart.cartItems');
+
         return response()->json(new UserResource($user));
     }
 

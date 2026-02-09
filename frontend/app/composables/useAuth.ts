@@ -1,9 +1,7 @@
-import type {ApiError} from "~/types/api";
-
 export const useAuth = () => {
     const api = useApi()
 
-    const user = useState<any | null>('auth:user', () => null)
+    const user = useState<User | null>('auth:user', () => null)
     const loaded = useState<boolean>('auth:loaded', () => false)
     const isAuth = computed(() => !!user.value)
 
@@ -27,7 +25,7 @@ export const useAuth = () => {
         userPending.value = true
 
         try {
-            user.value = await api('/api/user', { method: 'GET' })
+            user.value = await api<User>('/api/user', { method: 'GET' })
         } catch {
             user.value = null
         } finally {
@@ -42,7 +40,7 @@ export const useAuth = () => {
 
     const refreshUser = () => fetchUser({ force: true })
 
-    const login = async (payload: any) => {
+    const login = async (payload: LoginPayload) => {
         if (actionPending.value) return
 
         actionPending.value = true
@@ -56,7 +54,7 @@ export const useAuth = () => {
             const toast = useToast()
             toast.add({
                 title: 'Вход выполнен успешно',
-                description: `Добро пожаловать, ${user.value.name}`,
+                description: `Добро пожаловать, ${user.value?.name ?? ''}`,
                 color: 'success',
             })
 
@@ -77,7 +75,7 @@ export const useAuth = () => {
         }
     }
 
-    const register = async (payload: any) => {
+    const register = async (payload: RegisterPayload) => {
         if (actionPending.value) return
 
         actionPending.value = true
@@ -91,7 +89,7 @@ export const useAuth = () => {
             const toast = useToast()
             toast.add({
                 title: 'Регистрация выполнена успешно',
-                description: `Добро пожаловать, ${user.value.name}`,
+                description: `Добро пожаловать, ${user.value?.name ?? ''}`,
                 color: 'success',
             })
 

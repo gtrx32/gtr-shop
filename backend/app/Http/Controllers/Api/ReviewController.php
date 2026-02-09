@@ -23,16 +23,17 @@ class ReviewController extends Controller
     public function show(Review $review)
     {
         $user = auth()->user();
+
         if ($review->user_id !== $user->id) {
             return response()->json(['message' => 'Not found'], 404);
         }
-        return response()->json($review);
+
+        return response()->json(new ReviewResource($review));
     }
 
     public function store(ReviewRequest $request, Product $product)
     {
         $user = $request->user();
-
         $data = $request->validated();
 
         if ($product->reviews()->where('user_id', $user->id)->exists()) {
@@ -43,9 +44,9 @@ class ReviewController extends Controller
 
         $review = $product->reviews()->create([
             'user_id' => $user->id,
-            'title'   => $data['title'],
+            'title' => $data['title'],
             'comment' => $data['comment'],
-            'rating'  => $data['rating'],
+            'rating' => $data['rating'],
         ]);
 
         return response()->json(new ReviewResource($review), 201);
@@ -104,10 +105,7 @@ class ReviewController extends Controller
             'marks as dislikes' => fn($q) => $q->where('type', 'dislike'),
         ]);
 
-        return response()->json([
-            'message' => 'Review liked',
-            'review' => new ReviewResource($review),
-        ]);
+        return response()->json(new ReviewResource($review));
     }
 
     public function dislike(Review $review)
@@ -134,9 +132,6 @@ class ReviewController extends Controller
             'marks as dislikes' => fn($q) => $q->where('type', 'dislike'),
         ]);
 
-        return response()->json([
-            'message' => 'Review disliked',
-            'review' => new ReviewResource($review),
-        ]);
+        return response()->json(new ReviewResource($review));
     }
 }

@@ -18,7 +18,7 @@ class CartController extends Controller
             ->first();
 
         if (!$cart) {
-            return new CartResource($request->user()->cart()->create());
+            return response()->json(new CartResource($request->user()->cart()->create()));
         }
 
         return response()->json(new CartResource($cart));
