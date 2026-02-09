@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { z } from 'zod'
 
+definePageMeta({ middleware: 'guest' })
+
 const { login, actionPending, error } = useAuth()
 
 const form = reactive({
