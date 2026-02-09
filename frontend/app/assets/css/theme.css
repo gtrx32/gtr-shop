@@ -1,10 +1,11 @@
 @theme {
     --color-gtr-contrast: rgb(0, 0, 0);
     --color-gtr-base: rgb(25, 25, 25);
-    --color-gtr-toned:  rgb(60, 60, 60);
+    --color-gtr-toned: rgb(60, 60, 60);
     --color-gtr-muted: rgb(120, 120, 120);
     --color-gtr-dimmed: rgb(160, 160, 160);
     --color-gtr-soft: rgb(200, 200, 200);
+    --color-gtr-fade: rgb(225, 225, 225);
     --color-gtr-pale: rgb(245, 245, 245);
     --color-gtr-highlight: rgb(110, 135, 255);
     --color-gtr-accent: rgb(135, 150, 220);
@@ -15,10 +16,11 @@
 .dark {
     --color-gtr-contrast: rgb(255, 255, 255);
     --color-gtr-base: rgb(245, 245, 245);
-    --color-gtr-toned:  rgb(200, 200, 200);
-    --color-gtr-muted:  rgb(170, 170, 170);
+    --color-gtr-toned: rgb(200, 200, 200);
+    --color-gtr-muted: rgb(170, 170, 170);
     --color-gtr-dimmed: rgb(140, 140, 140);
     --color-gtr-soft: rgb(60, 60, 60);
+    --color-gtr-fade: rgb(35, 35, 35);
     --color-gtr-pale: rgb(25, 25, 25);
     --color-gtr-highlight: rgb(90, 115, 255);
     --color-gtr-accent: rgb(125, 140, 210);
