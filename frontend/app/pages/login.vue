@@ -61,7 +61,8 @@ async function onSubmit() {
         >
           <template #trailing>
             <UButton variant="link" size="xl" @click="showPassword = !showPassword">
-              <icon :name="showPassword ? 'mdi:eye-off-outline' : 'mdi:eye-outline'" class="text-xl" />
+              <icon name="mdi:eye-outline" v-show="!showPassword" class="text-xl"/>
+              <icon name="mdi:eye-off-outline" v-show="showPassword" class="text-xl"/>
             </UButton>
           </template>
         </UInput>

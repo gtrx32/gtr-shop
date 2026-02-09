@@ -105,14 +105,17 @@ const {theme, toggle: themeToggle} = useTheme()
               @click="themeToggle"
               aria-label="Переключить тему"
           >
-            <icon
-                :key="theme"
-                mode="svg"
-                class="text-xl"
-                :name="theme === 'dark'
-            ? 'line-md:moon-to-sunny-outline-transition'
-            : 'line-md:sunny-outline-to-moon-transition'"
-            />
+            <ClientOnly>
+              <icon
+                  :key="theme"
+                  mode="svg"
+                  class="text-xl"
+                  :name="theme === 'dark' ? 'line-md:moon-to-sunny-outline-transition' : 'line-md:sunny-outline-to-moon-transition'"
+              />
+              <template #fallback>
+                <span class="block w-5 h-5" aria-hidden="true"></span>
+              </template>
+            </ClientOnly>
           </u-button>
         </div>
       </div>
