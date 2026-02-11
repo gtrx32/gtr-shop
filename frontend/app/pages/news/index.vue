@@ -1,7 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Новости',
-  subtitle: 'Лента обновлений и анонсов',
+  heading: {
+    title: 'Новости',
+    subtitle: 'Лента обновлений и анонсов',
+  },
 })
 
 const api = useApi()

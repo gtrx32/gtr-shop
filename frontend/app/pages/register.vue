@@ -3,11 +3,14 @@ import {z} from 'zod'
 
 definePageMeta({
   middleware: 'guest',
-  title: 'Регистрация',
-  breadcrumbs: false,
+  heading: {
+    title: 'Регистрация',
+    breadcrumbs: false,
+    align: 'center',
+  },
   footer: {
-    variant: 'minimal'
-  }
+    variant: 'minimal',
+  },
 })
 
 const {register, actionPending, error} = useAuth()
