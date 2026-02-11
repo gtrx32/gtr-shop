@@ -4,7 +4,10 @@ import {z} from 'zod'
 definePageMeta({
   middleware: 'guest',
   title: 'Авторизация',
-  breadcrumbs: false
+  breadcrumbs: false,
+  footer: {
+    variant: 'minimal'
+  }
 })
 
 const {login, actionPending, error} = useAuth()
@@ -63,9 +66,8 @@ async function onSubmit() {
         >
           <template #trailing>
             <UButton
-                variant="ghost"
-                size="sm"
-                class="rounded-lg"
+                variant="link"
+                class="rounded-lg mr-1"
                 @click="showPassword = !showPassword"
             >
               <icon name="mdi:eye-outline" v-show="!showPassword"/>
