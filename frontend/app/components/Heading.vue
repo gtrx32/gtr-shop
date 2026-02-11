@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="space-y-4 w-full mb-6 md:mb-8">
+  <div class="space-y-4 w-full">
     <Breadcrumbs v-if="props.breadcrumbs"/>
 
     <div>

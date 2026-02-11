@@ -22,7 +22,7 @@ withDefaults(defineProps<Props>(), {
       align="start"
       :ui="{
           viewport: 'overflow-hidden rounded-xl',
-          item: 'basis-full sm:basis-1/2',
+          item: 'basis-full md:basis-1/2',
           prev: 'start-4! min-[1350px]:-start-12!',
           next: 'end-4! min-[1350px]:-end-12!',
           dots: 'static flex flex-wrap justify-center gap-2 mt-5',

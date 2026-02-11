@@ -10,10 +10,10 @@ const heading = computed(() => route.meta as HeadingMeta)
 </script>
 
 <template>
-  <div class="min-h-[100dvh] flex flex-col gap-8 sm:gap-12 bg-gtr-pale text-gtr-base">
+  <div class="min-h-[100dvh] flex flex-col gap-8 md:gap-12 bg-gtr-pale text-gtr-base">
     <Header/>
 
-    <main class="flex-1 max-w-7xl mx-auto w-full px-4 md:px-6 xl:px-0">
+    <main class="flex-1 flex flex-col gap-6 md:gap-8 max-w-7xl mx-auto w-full px-4 md:px-6 xl:px-0">
       <Heading
           v-if="heading.title"
           :title="heading.title"
@@ -21,9 +21,10 @@ const heading = computed(() => route.meta as HeadingMeta)
           :breadcrumbs="heading.breadcrumbs"
       />
 
-      <slot/>
+      <div class="flex-1 w-full flex flex-col">
+        <slot/>
+      </div>
     </main>
-
     <Footer/>
   </div>
 </template>

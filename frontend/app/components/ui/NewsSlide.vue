@@ -8,14 +8,6 @@ interface Props {
 const props = defineProps<Props>()
 
 const href = computed(() => `/news/${props.news.slug}`)
-
-const dateText = computed(() => {
-  const raw = props.news.active_from || props.news.created_at
-  if (!raw) return null
-  const d = new Date(raw)
-  if (Number.isNaN(d.getTime())) return null
-  return new Intl.DateTimeFormat('ru-RU', {day: '2-digit', month: 'long', year: 'numeric'}).format(d)
-})
 </script>
 
 <template>
@@ -37,8 +29,8 @@ const dateText = computed(() => {
         {{ news.excerpt }}
       </p>
 
-      <p v-if="dateText" class="text-xs md:text-sm text-white/70 text-end">
-        {{ dateText }}
+      <p class="text-xs md:text-sm text-white/70 text-end">
+        {{ formatDate(news.active_from ?? news.created_at) }}
       </p>
     </div>
 

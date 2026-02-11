@@ -51,17 +51,22 @@ async function loadMore() {
 </script>
 
 <template>
-  <div class="space-y-6 md:space-y-8 flex flex-col items-center">
+  <div class="flex flex-col items-center gap-6 md:gap-8">
     <div class="space-y-6 md:space-y-8">
       <NuxtLink
           v-for="item in news"
           :key="item.id"
           :to="`/news/${item.slug}`"
-          class="group block"
+          class="block group"
       >
-        <article class="flex flex-col md:flex-row transition hover:bg-gtr-fade/50">
-          <div class="shrink-0">
-            <img class="h-full w-full md:w-96 lg:w-128 object-cover" alt="" :src="item.image"/>
+        <article
+            class="flex flex-col md:flex-row transition duration-300 hover:bg-gtr-fade/70 rounded-3xl overflow-hidden">
+          <div class="shrink-0 overflow-hidden rounded-3xl">
+            <img
+                class="rounded-3xl h-full w-full md:w-96 lg:w-128 object-cover transition-transform duration-300 group-hover:scale-95"
+                alt=""
+                :src="item.image"
+            />
           </div>
           <div class="flex-1 flex flex-col gap-2 md:gap-4 py-4 md:p-6 lg:p-8">
             <h3 class="text-2xl md:text-xl lg:text-2xl leading-tight text-gtr-base font-medium">
@@ -71,7 +76,7 @@ async function loadMore() {
               {{ item.excerpt }}
             </p>
             <div class="mt-auto ml-auto text-sm text-gtr-dimmed">
-              {{ item.active_from ?? item.created_at }}
+              {{ formatDate(item.active_from ?? item.created_at) }}
             </div>
           </div>
         </article>
@@ -81,10 +86,14 @@ async function loadMore() {
         v-if="canLoadMore"
         @click="loadMore"
         color="primary" variant="ghost" size="xl"
+        :loading="loadingMore"
+        loading-icon="streamline-ultimate:loading-bold"
+        icon="mdi:arrow-down"
         :disabled="pending || loadingMore"
+        class="gap-1"
+        :ui="{leadingIcon: 'mt-0.5'}"
     >
-      <span v-if="loadingMore">Загрузка…</span>
-      <span v-else>Показать ещё</span>
+      Показать ещё
     </u-button>
   </div>
 </template>

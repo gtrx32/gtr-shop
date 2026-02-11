@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import {z} from 'zod'
 
-definePageMeta({middleware: 'guest'})
+definePageMeta({
+  middleware: 'guest',
+  title: 'Авторизация',
+  breadcrumbs: false
+})
 
 const {login, actionPending, error} = useAuth()
 
@@ -31,61 +35,66 @@ async function onSubmit() {
 </script>
 
 <template>
-  <div class="w-full flex justify-center items-center">
-    <UCard class="w-full max-w-sm">
-      <template #header>
-        <div class="text-xl font-semibold">Вход</div>
-      </template>
+  <div class="flex-1 flex items-center justify-center">
+    <UForm
+        ref="formRef"
+        :state="form"
+        :schema="schema"
+        @submit.prevent="onSubmit"
+        class="space-y-6 w-full max-w-sm"
+    >
+      <UFormField name="email" label="Электронная почта">
+        <UInput
+            v-model="form.email"
+            placeholder="address@mail.ru"
+            size="xl"
+            class="w-full"
+            :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
+        />
+      </UFormField>
 
-      <UForm
-          ref="formRef"
-          :state="form"
-          :schema="schema"
-          @submit.prevent="onSubmit"
-          class="space-y-3"
+      <UFormField name="password" label="Пароль">
+        <UInput
+            v-model="form.password"
+            :type="showPassword ? 'text' : 'password'"
+            size="xl"
+            class="w-full"
+            :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
+        >
+          <template #trailing>
+            <UButton
+                variant="ghost"
+                size="sm"
+                class="rounded-lg"
+                @click="showPassword = !showPassword"
+            >
+              <icon name="mdi:eye-outline" v-show="!showPassword"/>
+              <icon name="mdi:eye-off-outline" v-show="showPassword"/>
+            </UButton>
+          </template>
+        </UInput>
+      </UFormField>
+
+      <UCheckbox label="Запомнить меня" v-model="form.remember"/>
+
+      <UAlert
+          v-if="error"
+          color="error"
+          variant="subtle"
+          :description="error"
+          class="rounded-xl"
+      />
+
+      <UButton
+          type="submit"
+          size="xl"
+          block
+          :loading="actionPending"
+          :disabled="actionPending || (formRef?.errors?.length > 0)"
+          class="rounded-xl py-3"
       >
-        <UFormField name="email" label="Электронная почта" :ui="{ error: 'mt-0'}">
-          <UInput
-              v-model="form.email"
-              placeholder="address@mail.ru"
-              class="w-full"
-              :ui="{ base: 'py-2 focus-visible:ring-0.5 transition-[box-shadow] duration-200' }"
-          />
-        </UFormField>
-
-        <UFormField name="password" label="Пароль" :ui="{ error: 'mt-0'}">
-          <UInput
-              v-model="form.password"
-              class="w-full"
-              :type="showPassword ? 'text' : 'password'"
-              :ui="{ base: 'py-2 focus-visible:ring-0.5 transition-[box-shadow] duration-200' }"
-          >
-            <template #trailing>
-              <UButton variant="link" size="xl" @click="showPassword = !showPassword">
-                <icon name="mdi:eye-outline" v-show="!showPassword" class="text-xl"/>
-                <icon name="mdi:eye-off-outline" v-show="showPassword" class="text-xl"/>
-              </UButton>
-            </template>
-          </UInput>
-        </UFormField>
-
-        <UCheckbox label="Запомнить меня" v-model="form.remember"/>
-
-        <UAlert v-if="error" color="error" variant="subtle" :description="error"/>
-
-        <div class="flex justify-center">
-          <UButton
-              variant="solid"
-              type="submit"
-              :loading="actionPending"
-              :disabled="actionPending || (formRef?.errors?.length > 0)"
-              size="xl"
-              class="px-5"
-          >
-            Войти
-          </UButton>
-        </div>
-      </UForm>
-    </UCard>
+        Войти
+      </UButton>
+    </UForm>
   </div>
 </template>
