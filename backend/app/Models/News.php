@@ -34,4 +34,9 @@ class News extends Model
             }
         });
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
