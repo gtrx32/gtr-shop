@@ -4,13 +4,15 @@ const route = useRoute()
 
 const slug = computed(() => String(route.params.slug))
 
-const {data} = await useAsyncData(
+const { data } = await useAsyncData(
     () => `news:show:${slug.value}`,
     () => api<News>(`api/news/${slug.value}`),
-    {watch: [slug]}
+    { watch: [slug] }
 )
 
 const news = computed(() => data.value!)
+
+route.meta.breadcrumb = news.value.title
 </script>
 
 <template>
@@ -19,6 +21,7 @@ const news = computed(() => data.value!)
       :subtitle="news.excerpt"
       breadcrumbs
   />
+
   <div class="space-y-4">
     <img
         v-if="news.image"
@@ -27,7 +30,7 @@ const news = computed(() => data.value!)
         class="w-full h-[300px] lg:h-[600px] object-cover rounded-3xl"
     />
 
-    <div v-html="news.content"/>
+    <div v-html="news.content" />
 
     <div class="text-sm text-gtr-dimmed">
       {{ formatDate(news.active_from ?? news.created_at) }}

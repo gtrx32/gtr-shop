@@ -6,10 +6,12 @@ interface HeadingProps {
   center?: boolean
 }
 
-const {title, subtitle, breadcrumbs, center} = withDefaults(defineProps<HeadingProps>(), {
-  breadcrumbs: false,
-  center: false,
-})
+const {
+  title,
+  subtitle,
+  breadcrumbs = false,
+  center = false
+} = defineProps<HeadingProps>()
 </script>
 
 <template>

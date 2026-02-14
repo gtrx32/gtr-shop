@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  breadcrumb: 'Новости',
+})
+
 const api = useApi()
 
 const perPage = ref(10)
