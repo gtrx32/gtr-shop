@@ -12,7 +12,7 @@ const { data: news } = await useAsyncData('news', () =>
 
 <template>
   <div class="space-y-8 sm:space-y-12">
-    <UiBannerSlider :banners="banners ?? []"/>
-    <UiNewsSlider :news="news?.data ?? []"/>
+    <banner-slider :banners="banners ?? []"/>
+    <news-slider :news="news?.data ?? []"/>
   </div>
 </template>

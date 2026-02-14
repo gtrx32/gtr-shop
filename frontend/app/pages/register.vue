@@ -3,11 +3,6 @@ import {z} from 'zod'
 
 definePageMeta({
   middleware: 'guest',
-  heading: {
-    title: 'Регистрация',
-    breadcrumbs: false,
-    align: 'center',
-  },
   footer: {
     variant: 'minimal',
   },
@@ -47,36 +42,37 @@ async function onSubmit() {
 </script>
 
 <template>
+  <heading title="Регистрация" center />
   <div class="flex-1 flex items-center justify-center">
-    <UForm
+    <u-form
         ref="formRef"
         :state="form"
         :schema="schema"
         @submit.prevent="onSubmit"
         class="space-y-6 w-full max-w-sm"
     >
-      <UFormField name="name" label="Имя">
-        <UInput
+      <u-form-field name="name" label="Имя">
+        <u-input
             v-model="form.name"
             placeholder="Иван"
             size="xl"
             class="w-full"
             :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
         />
-      </UFormField>
+      </u-form-field>
 
-      <UFormField name="email" label="Электронная почта">
-        <UInput
+      <u-form-field name="email" label="Электронная почта">
+        <u-input
             v-model="form.email"
             placeholder="address@mail.ru"
             size="xl"
             class="w-full"
             :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
         />
-      </UFormField>
+      </u-form-field>
 
-      <UFormField name="password" label="Пароль">
-        <UInput
+      <u-form-field name="password" label="Пароль">
+        <u-input
             v-model="form.password"
             :type="showPassword ? 'text' : 'password'"
             size="xl"
@@ -84,20 +80,20 @@ async function onSubmit() {
             :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
         >
           <template #trailing>
-            <UButton
+            <u-button
                 variant="link"
                 class="rounded-lg mr-1"
                 @click="showPassword = !showPassword"
             >
               <icon name="mdi:eye-outline" v-show="!showPassword"/>
               <icon name="mdi:eye-off-outline" v-show="showPassword"/>
-            </UButton>
+            </u-button>
           </template>
-        </UInput>
-      </UFormField>
+        </u-input>
+      </u-form-field>
 
-      <UFormField name="password_confirmation" label="Подтверждение пароля">
-        <UInput
+      <u-form-field name="password_confirmation" label="Подтверждение пароля">
+        <u-input
             v-model="form.password_confirmation"
             class="w-full"
             :type="showPassword ? 'text' : 'password'"
@@ -105,19 +101,19 @@ async function onSubmit() {
             :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
         >
           <template #trailing>
-            <UButton
+            <u-button
                 variant="link"
                 class="rounded-lg mr-1"
                 @click="showPassword = !showPassword"
             >
               <icon name="mdi:eye-outline" v-show="!showPassword"/>
               <icon name="mdi:eye-off-outline" v-show="showPassword"/>
-            </UButton>
+            </u-button>
           </template>
-        </UInput>
-      </UFormField>
+        </u-input>
+      </u-form-field>
 
-      <UAlert
+      <u-alert
           v-if="error"
           color="error"
           variant="subtle"
@@ -125,7 +121,7 @@ async function onSubmit() {
           class="rounded-xl"
       />
 
-      <UButton
+      <u-button
           type="submit"
           size="xl"
           block
@@ -134,7 +130,7 @@ async function onSubmit() {
           class="rounded-xl py-3 mt-3"
       >
         Зарегистрироваться
-      </UButton>
-    </UForm>
+      </u-button>
+    </u-form>
   </div>
 </template>

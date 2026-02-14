@@ -3,7 +3,7 @@ const {theme, toggle: themeToggle} = useTheme()
 const route = useRoute()
 
 const isFullFooter = computed(() => {
-  return (route.meta as any)?.footer?.variant !== 'minimal'
+  return (route.meta)?.footer?.variant !== 'minimal'
 })
 </script>
 

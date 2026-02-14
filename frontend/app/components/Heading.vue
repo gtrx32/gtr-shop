@@ -1,33 +1,27 @@
 <script setup lang="ts">
-type HeadingProps = {
+interface HeadingProps {
   title: string
   subtitle?: string
   breadcrumbs?: boolean
-  align?: 'left' | 'center'
+  center?: boolean
 }
 
-const props = withDefaults(defineProps<HeadingProps>(), {
-  breadcrumbs: true,
-  align: 'left',
+const {title, subtitle, breadcrumbs, center} = withDefaults(defineProps<HeadingProps>(), {
+  breadcrumbs: false,
+  center: false,
 })
-
-const isCenter = computed(() => props.align === 'center')
 </script>
 
 <template>
-  <div class="space-y-4 w-full" :class="{ 'text-center': isCenter }">
-    <Breadcrumbs v-if="breadcrumbs"/>
+  <div class="space-y-4 w-full" :class="{ 'text-center': center }">
+    <Breadcrumbs v-if="breadcrumbs" :center/>
 
     <div>
-      <h1 class="text-4xl font-medium tracking-tight">
-        {{ title }}
-      </h1>
-      <p v-if="subtitle" class="mt-2 text-md text-gtr-toned">
-        {{ subtitle }}
-      </p>
+      <h1 class="text-4xl font-medium tracking-tight">{{ title }}</h1>
+      <p v-if="subtitle" class="mt-2 text-md text-gtr-toned">{{ subtitle }}</p>
     </div>
 
-    <div v-if="isCenter" class="flex items-center justify-center gap-3 mt-3 w-full">
+    <div v-if="center" class="flex items-center justify-center gap-3 mt-3 w-full">
       <div class="h-px flex-1 bg-gradient-to-r from-transparent to-gtr-soft"/>
       <span class="h-1.5 w-1.5 rounded-full bg-gtr-dimmed shadow-sm shrink-0"/>
       <div class="h-px flex-1 bg-gradient-to-r from-gtr-soft to-transparent"/>

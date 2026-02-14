@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  heading: {
-    title: 'Новости',
-    subtitle: 'Лента обновлений и анонсов',
-  },
-})
-
 const api = useApi()
 
 const perPage = ref(10)
@@ -53,9 +46,10 @@ async function loadMore() {
 </script>
 
 <template>
+  <heading title="Новости" subtitle="Лента обновлений и анонсов" breadcrumbs />
   <div class="flex flex-col items-center gap-6 md:gap-8">
     <div class="space-y-6 md:space-y-8">
-      <NuxtLink
+      <nuxt-link
           v-for="item in news"
           :key="item.id"
           :to="`/news/${item.slug}`"
@@ -82,7 +76,7 @@ async function loadMore() {
             </div>
           </div>
         </article>
-      </NuxtLink>
+      </nuxt-link>
     </div>
     <u-button
         v-if="canLoadMore"

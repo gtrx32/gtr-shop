@@ -3,11 +3,6 @@ import {z} from 'zod'
 
 definePageMeta({
   middleware: 'guest',
-  heading: {
-    title: 'Авторизация',
-    breadcrumbs: false,
-    align: 'center',
-  },
   footer: {
     variant: 'minimal',
   },
@@ -41,26 +36,27 @@ async function onSubmit() {
 </script>
 
 <template>
+  <heading title="Авторизация" center />
   <div class="flex-1 flex items-center justify-center">
-    <UForm
+    <u-form
         ref="formRef"
         :state="form"
         :schema="schema"
         @submit.prevent="onSubmit"
         class="space-y-6 w-full max-w-sm"
     >
-      <UFormField name="email" label="Электронная почта">
-        <UInput
+      <u-form-field name="email" label="Электронная почта">
+        <u-input
             v-model="form.email"
             placeholder="address@mail.ru"
             size="xl"
             class="w-full"
             :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
         />
-      </UFormField>
+      </u-form-field>
 
-      <UFormField name="password" label="Пароль">
-        <UInput
+      <u-form-field name="password" label="Пароль">
+        <u-input
             v-model="form.password"
             :type="showPassword ? 'text' : 'password'"
             size="xl"
@@ -68,21 +64,21 @@ async function onSubmit() {
             :ui="{base: 'py-3 rounded-xl focus-visible:ring-0 focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-gtr-soft transition duration-200'}"
         >
           <template #trailing>
-            <UButton
+            <u-button
                 variant="link"
                 class="rounded-lg mr-1"
                 @click="showPassword = !showPassword"
             >
               <icon name="mdi:eye-outline" v-show="!showPassword"/>
               <icon name="mdi:eye-off-outline" v-show="showPassword"/>
-            </UButton>
+            </u-button>
           </template>
-        </UInput>
-      </UFormField>
+        </u-input>
+      </u-form-field>
 
-      <UCheckbox label="Запомнить меня" v-model="form.remember"/>
+      <u-checkbox label="Запомнить меня" v-model="form.remember"/>
 
-      <UAlert
+      <u-alert
           v-if="error"
           color="error"
           variant="subtle"
@@ -90,7 +86,7 @@ async function onSubmit() {
           class="rounded-xl"
       />
 
-      <UButton
+      <u-button
           type="submit"
           size="xl"
           block
@@ -99,7 +95,7 @@ async function onSubmit() {
           class="rounded-xl py-3"
       >
         Войти
-      </UButton>
-    </UForm>
+      </u-button>
+    </u-form>
   </div>
 </template>
