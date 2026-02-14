@@ -81,13 +81,10 @@ async function loadMore() {
     <u-button
         v-if="canLoadMore"
         @click="loadMore"
-        color="primary" variant="ghost" size="xl"
+        :disabled="pending || loadingMore"
+        icon="mdi:arrow-down"
         :loading="loadingMore"
         loading-icon="streamline-ultimate:loading-bold"
-        icon="mdi:arrow-down"
-        :disabled="pending || loadingMore"
-        class="gap-1"
-        :ui="{leadingIcon: 'mt-0.5'}"
     >
       Показать ещё
     </u-button>
